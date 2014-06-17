@@ -20,6 +20,9 @@ public class Vendedor {
         this.usuario = usuario;
     }
 
+    public Vendedor() {
+    }
+
     public Vendedor(int codigo) {
         this.codigo = codigo;
     }

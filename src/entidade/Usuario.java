@@ -40,6 +40,9 @@ import persistencia.BD;
     public Usuario(int código) {
         this.código = código;
     }
+
+    public Usuario() {
+    }
  
    public int getCódigo()
    {
@@ -69,7 +72,7 @@ import persistencia.BD;
    
  public static String inserirUsuário(Usuario usuário) {
 
-        String sql = "INSERT INTO usuario(nome_user,senha_user,cargo_user)VALUES"
+        String sql = "INSERT INTO usuarios(nome_user,senha_user,cargo_user)VALUES"
                 + "('" + usuário.getNome() + "','" + usuário.getSenha() + "','" + usuário.getCargo() + "')";
         try {
             BD.comando.executeUpdate(sql);
@@ -79,7 +82,7 @@ import persistencia.BD;
         }
     }
  public static boolean nomeIgual(String nome){
-     String sql = "Select count(nome_user) from usuario where nome_user="+nome;
+     String sql = "Select count(nome_user) from usuarios where nome_user="+nome;
      int cont = 0;
      try {
             ResultSet lista_resultados = BD.comando.executeQuery(sql);
@@ -98,7 +101,7 @@ import persistencia.BD;
      
  }
     public static Usuario buscarUsuário(String nome) {
-        String sql = "SELECT * FROM usuario WHERE nome_user= '" + nome + "'";
+        String sql = "SELECT * FROM usuarios WHERE nome_user= '" + nome + "'";
         ResultSet lista_resultados;
         Usuario usuário = null;
         try {
@@ -119,7 +122,7 @@ import persistencia.BD;
         return usuário;
     }
      public static Usuario verificaUsuário(int cod) {
-        String sql = "SELECT * FROM usuario WHERE cod_user= '" + cod + "'";
+        String sql = "SELECT * FROM usuarios WHERE cod_user= '" + cod + "'";
         ResultSet lista_resultados;
         Usuario usuário = null;
         try {
@@ -155,7 +158,7 @@ import persistencia.BD;
     }
 
     public static ArrayList<Usuario> visãoTabela() {
-        String sql = "Select cod_user,nome_user,cargo_user from usuario";
+        String sql = "Select cod_user,nome_user,cargo_user from usuarios";
         ArrayList<Usuario> usuários = new ArrayList<Usuario>();
         try {
             ResultSet rs = BD.comando.executeQuery(sql);
@@ -171,7 +174,7 @@ import persistencia.BD;
     }
 
     public static String alterarUsuário(Usuario usuários) {
-        String sql = "UPDATE usuario SET nome_user='" + usuários.getNome()
+        String sql = "UPDATE usuarios SET nome_user='" + usuários.getNome()
                 + "',senha_user='" + usuários.getSenha()+"',cargo_user='" + usuários.getCargo()
                 + "' WHERE cod_user=" + usuários.getCódigo() + ";";
         try {
@@ -183,7 +186,7 @@ import persistencia.BD;
     }
 
     public static String eleminarUsuário(String nome) {
-        String sql = "DELETE FROM usuario WHERE nome_user=" + nome + ";";
+        String sql = "DELETE FROM usuarios WHERE nome_user=" + nome + ";";
         try {
             BD.comando.executeUpdate(sql);
             return null;

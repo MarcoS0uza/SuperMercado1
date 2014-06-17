@@ -8,14 +8,10 @@ import controle.buscaCEP;
 import entidade.Cliente;
 import entidade.FichaCadastro;
 import entidade.Visão;
-import java.awt.AWTException;
-import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -27,6 +23,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
 
     ControladorCadastroCliente controlador;
     private String tipo;//armazena o tipo do cliente(Fisica ou Juridica)
+    ArrayList<Cliente> clientes;
 
     public JanelaCadastroCliente_(ControladorCadastroCliente controlador) {
         this.controlador = controlador;
@@ -34,6 +31,8 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         estadoComboBox.setSelectedIndex(-1);
         setLocationRelativeTo(null);
         salvarButton.setVisible(false);
+        buscarButton.setVisible(false);
+        limpa();
     }
 
     @SuppressWarnings("unchecked")
@@ -53,11 +52,12 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         botões_clientePanel = new javax.swing.JPanel();
         eliminarButton = new javax.swing.JButton();
         novo_clienteButton = new javax.swing.JButton();
-        consultarButton = new javax.swing.JButton();
+        selecionarButton = new javax.swing.JButton();
         gravar_clienteButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         salvarButton = new javax.swing.JButton();
         cancelaButton = new javax.swing.JButton();
+        buscarButton = new javax.swing.JButton();
         tipo_pessoaLabel = new javax.swing.JLabel();
         fisicaRadioButton = new javax.swing.JRadioButton();
         juridicaRadioButton = new javax.swing.JRadioButton();
@@ -81,10 +81,20 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         dataFormattedTextField = new javax.swing.JFormattedTextField();
         dataLabel = new javax.swing.JLabel();
         sexoComboBox = new javax.swing.JComboBox();
+        frenteButton = new javax.swing.JButton();
+        atrasButton = new javax.swing.JButton();
+        primeiroButton = new javax.swing.JButton();
+        ultimoButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         dadosPanel.setBackground(new java.awt.Color(255, 255, 255));
         dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 14))); // NOI18N
@@ -101,6 +111,11 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         cod_clienteTextField.setEditable(false);
         cod_clienteTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cod_clienteTextField.setEnabled(false);
+        cod_clienteTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cod_clienteTextFieldKeyPressed(evt);
+            }
+        });
 
         nome_clienteTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nome_clienteTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -137,11 +152,11 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             }
         });
 
-        consultarButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        consultarButton.setText("Consultar");
-        consultarButton.addActionListener(new java.awt.event.ActionListener() {
+        selecionarButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        selecionarButton.setText("Selecionar");
+        selecionarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarButtonActionPerformed(evt);
+                selecionarButtonActionPerformed(evt);
             }
         });
 
@@ -173,10 +188,19 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             }
         });
 
+        cancelaButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cancelaButton.setText("Cancela");
         cancelaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelaButtonActionPerformed(evt);
+            }
+        });
+
+        buscarButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        buscarButton.setText("Buscar");
+        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarButtonActionPerformed(evt);
             }
         });
 
@@ -185,16 +209,18 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         botões_clientePanelLayout.setHorizontalGroup(
             botões_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botões_clientePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(novo_clienteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(eliminarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salvarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eliminarButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(consultarButton)
+                .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selecionarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gravar_clienteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,12 +230,13 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             botões_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botões_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(gravar_clienteButton)
-                .addComponent(consultarButton)
+                .addComponent(selecionarButton)
                 .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(salvarButton)
                 .addComponent(eliminarButton)
                 .addComponent(novo_clienteButton)
-                .addComponent(cancelaButton))
+                .addComponent(cancelaButton)
+                .addComponent(buscarButton))
         );
 
         tipo_pessoaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -218,7 +245,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         fisicaRadioButton.setBackground(new java.awt.Color(255, 255, 255));
         pessoabuttonGroup.add(fisicaRadioButton);
         fisicaRadioButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        fisicaRadioButton.setText("Física");
+        fisicaRadioButton.setText("Fisica");
         fisicaRadioButton.setEnabled(false);
         fisicaRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,50 +436,109 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         dataLabel.setText("Data de Cadastro");
 
         sexoComboBox.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        sexoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        sexoComboBox.setModel(new DefaultComboBoxModel(FichaCadastro.Sexo.values())
+        );
         sexoComboBox.setEnabled(false);
+
+        frenteButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        frenteButton.setText(">");
+        frenteButton.setToolTipText("Próximo");
+        frenteButton.setEnabled(false);
+        frenteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frenteButtonActionPerformed(evt);
+            }
+        });
+
+        atrasButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        atrasButton.setText("<");
+        atrasButton.setToolTipText("Anterior");
+        atrasButton.setEnabled(false);
+        atrasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasButtonActionPerformed(evt);
+            }
+        });
+
+        primeiroButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        primeiroButton.setText("<<");
+        primeiroButton.setToolTipText("Primeiro");
+        primeiroButton.setEnabled(false);
+        primeiroButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primeiroButtonActionPerformed(evt);
+            }
+        });
+
+        ultimoButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        ultimoButton.setText(">>");
+        ultimoButton.setToolTipText("Ultimo");
+        ultimoButton.setEnabled(false);
+        ultimoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ultimoButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Imprimir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dadosPanelLayout = new javax.swing.GroupLayout(dadosPanel);
         dadosPanel.setLayout(dadosPanelLayout);
         dadosPanelLayout.setHorizontalGroup(
             dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dadosPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(endereço_clientePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
+                .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dadosPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botões_clientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dadosPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeLabel)
-                            .addComponent(codigoLabel)
-                            .addComponent(sexoLabel)
-                            .addComponent(email_clienteLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome_clienteTextField)
-                            .addComponent(email_clienteTextField)
+                            .addComponent(endereço_clientePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(dadosPanelLayout.createSequentialGroup()
                                 .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeLabel)
+                                    .addComponent(codigoLabel)
+                                    .addComponent(sexoLabel)
+                                    .addComponent(email_clienteLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nome_clienteTextField)
+                                    .addComponent(email_clienteTextField)
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
-                                        .addComponent(cod_clienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sexoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dataLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dataFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(dadosPanelLayout.createSequentialGroup()
-                                        .addComponent(sexoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                                         .addComponent(tipo_pessoaLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(fisicaRadioButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(juridicaRadioButton)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cpfcnpjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cnpjCpfFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botões_clientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(cpfcnpjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cnpjCpfFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(dadosPanelLayout.createSequentialGroup()
+                                        .addComponent(cod_clienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dataLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dataFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(95, 95, 95)
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(primeiroButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(atrasButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(frenteButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ultimoButton)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         dadosPanelLayout.setVerticalGroup(
@@ -463,8 +549,13 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
                     .addComponent(cod_clienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codigoLabel)
                     .addComponent(dataFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataLabel))
-                .addGap(6, 6, 6)
+                    .addComponent(dataLabel)
+                    .addComponent(frenteButton)
+                    .addComponent(ultimoButton)
+                    .addComponent(atrasButton)
+                    .addComponent(primeiroButton)
+                    .addComponent(jButton1))
+                .addGap(3, 3, 3)
                 .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeLabel)
                     .addComponent(nome_clienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -499,7 +590,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(dadosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         pack();
@@ -517,6 +608,10 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         bairroTextField.setText("");
         cepFormattedTextField.setText("");
         telefoneFormattedTextField.setText("");
+        cidadeTextField.setSelectedIndex(-1);
+        estadoComboBox.setSelectedIndex(-1);
+        sexoComboBox.setSelectedIndex(-1);
+        pessoabuttonGroup.clearSelection();
         //cidadeTextField.setText("");
     }
 
@@ -607,10 +702,16 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         limpa();
         setAtivo(false);
         novo_clienteButton.setEnabled(true);
-        consultarButton.setEnabled(true);
+        selecionarButton.setEnabled(true);
         cancelaButton.setEnabled(false);
         gravar_clienteButton.setEnabled(false);
+        selecionarButton.setVisible(true);
+        buscarButton.setVisible(false);
+        cod_clienteTextField.setEditable(false);
+        cod_clienteTextField.setEnabled(false);
         editarSalvar();
+        cont = 0;
+        botoesNavegacao(false);
     }//GEN-LAST:event_cancelaButtonActionPerformed
 
     //evento salvar (Update)
@@ -620,20 +721,49 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             tipo = juridicaRadioButton.getText();
         } else if (fisicaRadioButton.isSelected()) {
             tipo = fisicaRadioButton.getText();
-        }
-
-        //captura o sexo do cliente, caso seja juridica sexo = "9"
-        String sexo = "";
-        if (cpfcnpjLabel.getText().equalsIgnoreCase("Cnpj")) {
-            sexo = "9";
         } else {
-            sexo = sexoComboBox.getSelectedItem().toString();
+            tipo = null;
         }
+        String sexo, cidade, uf;
+            int cod, numero;
+            
+            //captura o sexo do cliente, caso seja juridica sexo = "9"
+            if (cpfcnpjLabel.getText().equalsIgnoreCase("Cnpj")) {
+                sexo = "9";
+            } else {
+                if (sexoComboBox.getSelectedIndex() == -1) {
+                    sexo = null;
+                } else {
+                    sexo = sexoComboBox.getSelectedItem().toString();
+                }
+            }
+            if (cod_clienteTextField.getText().isEmpty()) {
+                cod = -1;
+            } else {
+                cod = Integer.parseInt(cod_clienteTextField.getText());
+            }
+
+            if (numeroTextField.getText().isEmpty()) {
+                numero = -1;
+            } else {
+                numero = Integer.parseInt(numeroTextField.getText());
+            }
+
+            if (estadoComboBox.getSelectedIndex() == -1) {
+                uf = null;
+            } else {
+                uf = estadoComboBox.getSelectedItem().toString();
+            }
+            if (cidadeTextField.getSelectedIndex() == -1) {
+                cidade = null;
+            } else {
+                cidade = cidadeTextField.getSelectedItem().toString();
+            }
 
         //cria objeto cliente com os dados do jFrame
-        Cliente cliente = new Cliente(tipo, sexo.toString(),
-                Integer.valueOf(cod_clienteTextField.getText()).intValue(),//convert int
-                Integer.valueOf(numeroTextField.getText()).intValue(),//convert int
+        Cliente cliente = new Cliente(tipo, sexo,
+                Integer.parseInt(cod_clienteTextField.getText()),//convert int
+        Integer.parseInt(numeroTextField.getText()),//convert int
                 nome_clienteTextField.getText(), dataFormattedTextField.getText(),
                 cnpjCpfFormattedTextField.getText().replace(".", "").replace("/", "").replace("-", "")/*replace() retira mascara*/, ruaTextField.getText(),
                 bairroTextField.getText(), telefoneFormattedTextField.getText().replace("(", "").replace(")", "").replace("-", "")/*replace() retira mascara*/,
@@ -641,10 +771,12 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
                 String.valueOf(cidadeTextField.getSelectedIndex()) + "-" + cidadeTextField.getSelectedItem().toString(), email_clienteTextField.getText());
 
         String mensagem_erro;
-        if (!dadosOK(cliente)) {//verificada se tem campos em branco
+        System.out.println(dadosOK(cliente));
+        if (dadosOK(cliente)) {//verificada se tem campos em branco
             mensagem_erro = "Algum atributo do cliente não foi preenchido";
         } else {
             mensagem_erro = controlador.alterarCliente(cliente);
+            clientes.set(cont, cliente);
         }
 
         //trata retorno do inserirCliente(cliente)
@@ -670,9 +802,18 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
 
     //evento gravar(Insert)
     private void gravar_clienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravar_clienteButtonActionPerformed
-        consultarButton.setEnabled(true);
+        selecionarButton.setEnabled(true);
         cancelaButton.setEnabled(false);
         String mensagem_erro;
+
+        //captura o tipo do cliente
+        if (juridicaRadioButton.isSelected()) {
+            tipo = juridicaRadioButton.getText();
+        } else if (fisicaRadioButton.isSelected()) {
+            tipo = fisicaRadioButton.getText();
+        } else {
+            tipo = null;
+        }
 
         //somado com a função dadosOk verificada se tem campos em branco
         if (numeroTextField.getText().equals("")) {
@@ -696,8 +837,8 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
                 bairroTextField.getText(), telefoneFormattedTextField.getText().replace("(", "").replace(")", "").replace("-", "")/*replace() retira mascara*/,
                 cepFormattedTextField.getText().replace(".", "").replace("-", ""), estadoComboBox.getSelectedItem().toString(),
                 cidadeTextField.getSelectedItem().toString(), email_clienteTextField.getText());
-
-        if (!dadosOK(cliente)) {//verificada se tem campos em branco
+        
+        if (dadosOK(cliente)) {//verificada se tem campos em branco
             mensagem_erro = "Não pode conter registros em branco";
         } else {
             mensagem_erro = controlador.inserirCliente(cliente);//executa sql
@@ -719,34 +860,28 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
 
     }//GEN-LAST:event_gravar_clienteButtonActionPerformed
 
-    //chama janela responsavel por consulta no BD (Select)
-    private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        JanelaConsulta<Cliente> consulta = new JanelaConsulta<Cliente>(new Cliente());
-        consulta.setTitle("Clientes");//muda o titulo da janela, para identificar a classe chamadora
-        consulta.setVisible(true);
-        limpa();
-    }//GEN-LAST:event_consultarButtonActionPerformed
-
     //verifica se se há campos em branco, se tiver retorna false senão true
     public static boolean dadosOK(Cliente clientes) {
-        if ((!clientes.getNome().equals(""))
-                && (!clientes.getN_documento().equals(""))
-                && (!clientes.getEmail().equals(""))
-                && (!clientes.getEndereço().equals(""))
-                && (!clientes.getBairro().equals(""))
-                && (clientes.getNumero() >= 0)
-                && (clientes.getCódigo() >= 0)
-                && (!clientes.getCep().equals(""))
-                && (!clientes.getTelefone().equals(""))
-                && (!clientes.getCidade().equals(""))) {
-            return true;
-        } else {
-            return false;
-        }
+        System.out.println(clientes.toString());
+        return (clientes.getNome().equals(""))
+                && (clientes.getN_documento().trim().equals(""))
+                && (clientes.getTipo_cliente() == null)
+                && (clientes.getData_cadastro().equals(""))
+                && (clientes.getEmail().equals(""))
+                && (clientes.getEndereço().equals(""))
+                && (clientes.getBairro().equals(""))
+                && (clientes.getNumero() == -1)
+                && (clientes.getCódigo() == -1)
+                && (clientes.getCep().trim().equals(""))
+                && (clientes.getSexo() == null)
+                && (clientes.getTelefone().trim().equals(""))
+                && (clientes.getCidade() == null)
+                && (clientes.getEstado() == null);
     }
 
     //evento novo, prepara a janela para inserir um cadastro
     private void novo_clienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novo_clienteButtonActionPerformed
+        cod_clienteTextField.setEditable(false);
         setEdição(true);
         editarSalvar();
         tipo = fisicaRadioButton.getText();
@@ -757,7 +892,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         nome_clienteTextField.grabFocus();
         novo_clienteButton.setEnabled(false);
         eliminarButton.setEnabled(false);
-        consultarButton.setEnabled(false);
+        selecionarButton.setEnabled(false);
         editarButton.setEnabled(false);
         cancelaButton.setEnabled(true);
         cod_clienteTextField.setText(Cliente.id());
@@ -795,7 +930,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
             String[] city = cliente.getCidade().split("-");//extrai index do nome da cidade
             int index_cidade = Integer.valueOf(city[0]).intValue();//convert o index para inteiro
             cidadeTextField.setSelectedIndex(index_cidade);
-        }else{
+        } else {
             cidadeTextField.setSelectedIndex(-1);
         }
 
@@ -823,6 +958,8 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
 
         setEdição(false);
         editarSalvar();
+        selecionarButton.setVisible(true);
+        buscarButton.setVisible(false);
 
     }
 
@@ -857,23 +994,22 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
                     ruaTextField.setText(buscaCEP.getEndereco(cep).replace("Ã£", "ã"));
                     bairroTextField.setText(buscaCEP.getBairro(cep).replace("Ã£", "ã"));
                     estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
-                     //.setText(buscaCEP.getCidade(cep).replace("Ã£", "ã").toUpperCase());
-                     estadoComboBox.grabFocus();
-                     //Robot rob = new Robot();
-                     //rob.keyPress(KeyEvent.VK_ENTER);
-                     //rob.delay(1000);
-                     numeroTextField.grabFocus();
-
+                    //.setText(buscaCEP.getCidade(cep).replace("Ã£", "ã").toUpperCase());
+                    estadoComboBox.grabFocus();
+                    //Robot rob = new Robot();
+                    //rob.keyPress(KeyEvent.VK_ENTER);
+                    //rob.delay(1000);
+                    numeroTextField.grabFocus();
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Cep " + cep + " não encontrado ");
                 }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao buscar endereço: " + ex);
-            } 
+            }
 
         }
-        
+
     }//GEN-LAST:event_buscacepjLabelMouseClicked
 
     private void estadoComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_estadoComboBoxFocusLost
@@ -896,12 +1032,166 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscacepjLabelMouseEntered
 
+    private void cod_clienteTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_clienteTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            JanelaConsulta<Cliente> consulta = new JanelaConsulta<Cliente>(new Cliente());
+            consulta.setTitle("Clientes");//muda o titulo da janela, para identificar a classe chamadora
+            consulta.setVisible(true);
+            limpa();
+        }
+    }//GEN-LAST:event_cod_clienteTextFieldKeyPressed
+
+    //chama janela responsavel por consulta no BD (Select)
+    private void selecionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarButtonActionPerformed
+        limpa();
+        setAtivo(true);
+        setEdição(true);
+        cancelaButton.setEnabled(true);
+        cod_clienteTextField.grabFocus();
+        selecionarButton.setVisible(false);
+        buscarButton.setVisible(true);
+        cod_clienteTextField.setEditable(true);
+        cod_clienteTextField.setEnabled(true);
+    }//GEN-LAST:event_selecionarButtonActionPerformed
+
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        cont = 0;
+        if (!cod_clienteTextField.getText().isEmpty()) {
+            Cliente cliente = Cliente.buscarCliente(Integer.parseInt(cod_clienteTextField.getText()));
+            if (cliente == null) {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+            } else {
+                mostraDados(cliente);
+                selecionarButton.setVisible(true);
+                buscarButton.setVisible(false);
+                botoesNavegacao(false);
+            }
+        } else {
+            
+            botoesNavegacao(true);
+            String sexo, cidade, uf;
+            int cod, numero;
+            if (juridicaRadioButton.isSelected()) {
+                tipo = juridicaRadioButton.getText();
+            } else if (fisicaRadioButton.isSelected()) {
+                tipo = fisicaRadioButton.getText();
+            } else {
+                tipo = null;
+            }
+
+            //captura o sexo do cliente, caso seja juridica sexo = "9"
+
+                if (sexoComboBox.getSelectedIndex() == -1) {
+                    sexo = null;
+                } else {
+                    sexo = sexoComboBox.getSelectedItem().toString();
+                }
+            
+
+            if (cod_clienteTextField.getText().isEmpty()) {
+                cod = -1;
+            } else {
+                cod = Integer.parseInt(cod_clienteTextField.getText());
+            }
+
+            if (numeroTextField.getText().isEmpty()) {
+                numero = -1;
+            } else {
+                numero = Integer.parseInt(numeroTextField.getText());
+            }
+
+            if (estadoComboBox.getSelectedIndex() == -1) {
+                uf = null;
+            } else {
+                uf = estadoComboBox.getSelectedItem().toString();
+            }
+            if (cidadeTextField.getSelectedIndex() == -1) {
+                cidade = null;
+            } else {
+                cidade = String.valueOf(cidadeTextField.getSelectedIndex()) + "-" + cidadeTextField.getSelectedItem().toString();
+            }
+            //cria objeto cliente com os dados do jFrame
+            try {
+                Cliente cliente = new Cliente(tipo, sexo, cod,//convert int
+                        numero,//convert int
+                        nome_clienteTextField.getText(), dataFormattedTextField.getText(),
+                        cnpjCpfFormattedTextField.getText().replace(".", "").replace("/", "").replace("-", "")/*replace() retira mascara*/, ruaTextField.getText(),
+                        bairroTextField.getText(), telefoneFormattedTextField.getText().replace("(", "").replace(")", "").replace("-", "")/*replace() retira mascara*/,
+                        cepFormattedTextField.getText().replace(".", "").replace("-", ""),
+                        uf,
+                        cidade,
+                        email_clienteTextField.getText());
+
+                if (dadosOK(cliente)) {
+                    cliente = null;
+                } 
+                    clientes = Cliente.buscarTodosCliente(cliente);
+                    if(clientes.isEmpty()){
+                       JOptionPane.showMessageDialog(this, "Cliente não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE); 
+                    }else{
+                        if(clientes.size() == 1){
+                            botoesNavegacao(false);
+                        }
+                    mostraDados(clientes.get(0));
+                    selecionarButton.setVisible(true);
+                    buscarButton.setVisible(false);
+                    
+                    }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }//GEN-LAST:event_buscarButtonActionPerformed
+    int cont = 0;
+    private void frenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenteButtonActionPerformed
+        if (cont < clientes.size()) {
+            mostraDados(clientes.get(cont + 1));
+            cont++;
+        }
+
+    }//GEN-LAST:event_frenteButtonActionPerformed
+
+    private void botoesNavegacao(boolean estado) {
+        frenteButton.setEnabled(estado);
+        atrasButton.setEnabled(estado);
+        ultimoButton.setEnabled(estado);
+        primeiroButton.setEnabled(estado);
+    }
+    private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasButtonActionPerformed
+        if (cont != 0) {
+            mostraDados(clientes.get(cont - 1));
+            cont--;
+        }
+
+    }//GEN-LAST:event_atrasButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        cont = 0;
+    }//GEN-LAST:event_formWindowClosed
+
+    private void primeiroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeiroButtonActionPerformed
+        mostraDados(clientes.get(0));
+        cont = 0;
+    }//GEN-LAST:event_primeiroButtonActionPerformed
+
+    private void ultimoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ultimoButtonActionPerformed
+        mostraDados(clientes.get(clientes.size() - 1));
+        cont = clientes.size() - 1;
+
+    }//GEN-LAST:event_ultimoButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new RelatorioP(clientes).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atrasButton;
     private javax.swing.JLabel bairroLabel;
     public static javax.swing.JTextField bairroTextField;
     private javax.swing.JPanel botões_clientePanel;
     public static javax.swing.JLabel buscacepjLabel;
+    public static javax.swing.JButton buscarButton;
     private javax.swing.JButton cancelaButton;
     public static javax.swing.JFormattedTextField cepFormattedTextField;
     private javax.swing.JLabel cepLabel;
@@ -910,7 +1200,6 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
     public static javax.swing.JFormattedTextField cnpjCpfFormattedTextField;
     public static javax.swing.JTextField cod_clienteTextField;
     private javax.swing.JLabel codigoLabel;
-    public static javax.swing.JButton consultarButton;
     public static javax.swing.JLabel cpfcnpjLabel;
     private javax.swing.JPanel dadosPanel;
     public static javax.swing.JFormattedTextField dataFormattedTextField;
@@ -923,7 +1212,9 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
     public static javax.swing.JComboBox estadoComboBox;
     private javax.swing.JLabel estadoLabel;
     public static javax.swing.JRadioButton fisicaRadioButton;
+    private javax.swing.JButton frenteButton;
     public static javax.swing.JButton gravar_clienteButton;
+    private javax.swing.JButton jButton1;
     public static javax.swing.JRadioButton juridicaRadioButton;
     private javax.swing.JLabel nomeLabel;
     public static javax.swing.JTextField nome_clienteTextField;
@@ -931,13 +1222,16 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
     private javax.swing.JLabel numeroLabel;
     public static javax.swing.JTextField numeroTextField;
     public static javax.swing.ButtonGroup pessoabuttonGroup;
+    private javax.swing.JButton primeiroButton;
     private javax.swing.JLabel ruaLabel;
     public static javax.swing.JTextField ruaTextField;
     public static javax.swing.JButton salvarButton;
+    public static javax.swing.JButton selecionarButton;
     public static javax.swing.JComboBox sexoComboBox;
     public static javax.swing.JLabel sexoLabel;
     public static javax.swing.JFormattedTextField telefoneFormattedTextField;
     private javax.swing.JLabel telefoneLabel;
     public static javax.swing.JLabel tipo_pessoaLabel;
+    private javax.swing.JButton ultimoButton;
     // End of variables declaration//GEN-END:variables
 }

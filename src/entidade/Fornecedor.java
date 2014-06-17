@@ -152,6 +152,9 @@ public class Fornecedor extends FichaCadastro {
     public Fornecedor(int código, String nome, String data_cadastro, String n_documento) {
         super(código, nome, data_cadastro, n_documento);
     }
+
+    public Fornecedor() {
+    }
     
 //métodos get
     public int getCódigo() {

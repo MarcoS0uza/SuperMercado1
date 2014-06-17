@@ -62,16 +62,21 @@ public class JanelaCadastroUsuário extends javax.swing.JFrame {
         setResizable(false);
 
         dadosPanel.setBackground(new java.awt.Color(255, 255, 255));
-        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Usuários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Usuários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
 
+        codigoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         codigoLabel.setText("Codigo");
 
+        nomeLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nomeLabel.setText("Nome");
 
+        cargoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cargoLabel.setText("Cargo");
 
+        senhaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         senhaLabel.setText("Senha");
 
+        confirma_senhaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         confirma_senhaLabel.setText("Confirme a Senha");
 
         cod_usuarioTextField.setEditable(false);
@@ -338,7 +343,7 @@ public class JanelaCadastroUsuário extends javax.swing.JFrame {
     }
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        JanelaConsultaUsuário user = new JanelaConsultaUsuário();
+        JanelaConsulta<Usuario> user = new JanelaConsulta<Usuario>(new Usuario());
             user.setTitle("Usuário");
             user.setVisible(true);
         limpa();

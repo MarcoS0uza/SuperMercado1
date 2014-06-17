@@ -79,4 +79,9 @@ public class FichaCadastro {
         return mf.valueToString(texto);
     }
 
+    @Override
+    public String toString() {
+        return "FichaCadastro{" + "c\u00f3digo=" + código + ", numero=" + numero + ", nome=" + nome + ", n_documento=" + n_documento + ", endere\u00e7o=" + endereço + ", bairro=" + bairro + ", telefone=" + telefone + ", cep=" + cep + ", estado=" + estado + ", cidade=" + cidade + ", email=" + email + ", data_cadastro=" + data_cadastro + '}';
+    }
+
 }

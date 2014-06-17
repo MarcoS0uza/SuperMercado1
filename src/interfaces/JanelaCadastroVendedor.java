@@ -361,9 +361,9 @@ public class JanelaCadastroVendedor extends javax.swing.JFrame {
 
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        JanelaConsultaVendedor jvendedor = new JanelaConsultaVendedor();
-        jvendedor.setTitle("Vendedor");
-        jvendedor.setVisible(true);
+        JanelaConsulta<Vendedor> vendedor = new JanelaConsulta<Vendedor>(new Vendedor());
+        vendedor.setTitle("Vendedor");
+        vendedor.setVisible(true);
         limpa();
     }//GEN-LAST:event_consultarButtonActionPerformed
 
@@ -447,7 +447,7 @@ public class JanelaCadastroVendedor extends javax.swing.JFrame {
 
     private void cod_usuarioTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cod_usuarioTextFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F2) {
-            JanelaConsultaUsuário user = new JanelaConsultaUsuário();
+            JanelaConsulta<Usuario> user = new JanelaConsulta<Usuario>(new Usuario());
             user.setTitle("Consulta Usuario");
             user.setVisible(true);
         }

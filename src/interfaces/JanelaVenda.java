@@ -726,7 +726,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         valor_total_venda_liqLabel.setEnabled(estado);
     }
     private void buscar_clienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_clienteButtonActionPerformed
-        JanelaConsultaCliente consulta = new JanelaConsultaCliente();
+        JanelaConsulta<Cliente> consulta = new JanelaConsulta<Cliente>(new Cliente());
         consulta.setTitle("Selecione o cliente para a venda");
         consulta.setVisible(true);
     }//GEN-LAST:event_buscar_clienteButtonActionPerformed
@@ -996,7 +996,7 @@ public class JanelaVenda extends javax.swing.JFrame {
 
         }
         if (evt.getKeyCode() == KeyEvent.VK_F2) {
-            JanelaConsultaProduto jProduto = new JanelaConsultaProduto();
+            JanelaConsulta<Produto> jProduto = new JanelaConsulta<Produto>(new Produto());
             jProduto.setTitle("Selecione o Produto");
             jProduto.setVisible(true);
             limpaProduto();

@@ -113,18 +113,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(user_logadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
 
         cadastroMenu.setText("Cadastro");
-        cadastroMenu.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        cadastroMenu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/Clients-icon.png"))); // NOI18N
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem1.setText("Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,8 +133,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         cadastroMenu.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/suitcase-icon.png"))); // NOI18N
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem2.setText("Fornecedor");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,8 +143,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         cadastroMenu.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/product-icon.png"))); // NOI18N
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem3.setText("Produto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +153,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         cadastroMenu.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/User-Executive-Green-icon.png"))); // NOI18N
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem4.setText("Usuário");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,8 +163,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         cadastroMenu.add(jMenuItem4);
 
         jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem14.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/vendedor.png"))); // NOI18N
+        jMenuItem14.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem14.setText("Vendedor");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,11 +175,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(cadastroMenu);
 
         movimentaçãoMenu.setText("Movimentação");
-        movimentaçãoMenu.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        movimentaçãoMenu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         vendaMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        vendaMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        vendaMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/Cash-register-icon.png"))); // NOI18N
+        vendaMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         vendaMenuItem.setText("Venda");
         vendaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,8 +188,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         movimentaçãoMenu.add(vendaMenuItem);
 
         compraMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        compraMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        compraMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/shopping-cart-icon.png"))); // NOI18N
+        compraMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         compraMenuItem.setText("Compra");
         compraMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,8 +198,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         movimentaçãoMenu.add(compraMenuItem);
 
         jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem13.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/item-configuration-icon.png"))); // NOI18N
+        jMenuItem13.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem13.setText("Ajuste de Estoque");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,13 +210,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(movimentaçãoMenu);
 
         relatóriosMenu.setText("Relatórios");
-        relatóriosMenu.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        relatóriosMenu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         rel_cadastroMenu.setText("Cadastro");
-        rel_cadastroMenu.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        rel_cadastroMenu.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
 
-        cad_clienteMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        cad_clienteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/cliente-report-icon.png"))); // NOI18N
+        cad_clienteMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         cad_clienteMenuItem.setText("Cliente");
         cad_clienteMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,30 +224,25 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         rel_cadastroMenu.add(cad_clienteMenuItem);
 
-        cad_fornecedorMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        cad_fornecedorMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/forns-icon.png"))); // NOI18N
+        cad_fornecedorMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         cad_fornecedorMenuItem.setText("Fornecedor");
         rel_cadastroMenu.add(cad_fornecedorMenuItem);
 
-        cad_produtosMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        cad_produtosMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/product-sales-report-icon.png"))); // NOI18N
+        cad_produtosMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         cad_produtosMenuItem.setText("Produtos");
         rel_cadastroMenu.add(cad_produtosMenuItem);
 
-        cad_usuarioMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        cad_usuarioMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/cliente-report-icon.png"))); // NOI18N
+        cad_usuarioMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         cad_usuarioMenuItem.setText("Usuários");
         rel_cadastroMenu.add(cad_usuarioMenuItem);
 
         relatóriosMenu.add(rel_cadastroMenu);
 
-        rel_vendaMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        rel_vendaMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/venda-report-icon.png"))); // NOI18N
+        rel_vendaMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         rel_vendaMenuItem.setText("Venda");
         relatóriosMenu.add(rel_vendaMenuItem);
 
-        rel_compraMenuItem.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        rel_compraMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/report-icon.png"))); // NOI18N
+        rel_compraMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         rel_compraMenuItem.setText("Compra");
         rel_compraMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,10 +254,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(relatóriosMenu);
 
         backupMenu.setText("Backup");
-        backupMenu.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        backupMenu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        backupMenuItem.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        backupMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/Data-Add-database-icon.png"))); // NOI18N
+        backupMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         backupMenuItem.setText("Backup");
         backupMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,8 +265,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         backupMenu.add(backupMenuItem);
 
-        restoreMenuItem.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        restoreMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/Data-Database-backup-icon.png"))); // NOI18N
+        restoreMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         restoreMenuItem.setText("Restore");
         restoreMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,11 +277,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(backupMenu);
 
         jMenu1.setText("Configurações");
-        jMenu1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/application-settings-icon.png"))); // NOI18N
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         jMenuItem5.setText("Configurações");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,11 +292,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         sairMenu.setText("Sair");
-        sairMenu.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        sairMenu.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         logoutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        logoutMenuItem.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        logoutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/Log-Out-icon.png"))); // NOI18N
+        logoutMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         logoutMenuItem.setText("Logout");
         logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,8 +305,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         sairMenu.add(logoutMenuItem);
 
         sairMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        sairMenuItem.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
-        sairMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/img/logout-icon.png"))); // NOI18N
+        sairMenuItem.setFont(new java.awt.Font("Segoe UI Light", 0, 15)); // NOI18N
         sairMenuItem.setText("Sair do Sistema");
         sairMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author MARCOANTONIO
  */
 public class JanelaCadastroFornecedor extends javax.swing.JFrame {
-
+    
     ControladorCadastroFornecedor controlador;
     static boolean isActive;
 
@@ -87,7 +87,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         });
 
         dadosPanel.setBackground(new java.awt.Color(255, 255, 255));
-        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Fornecedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Fornecedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 14))); // NOI18N
 
         codigo_fornecedorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         codigo_fornecedorLabel.setText("Codigo");
@@ -218,7 +218,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         });
 
         endereço_fornecedorPanel.setBackground(new java.awt.Color(255, 255, 255));
-        endereço_fornecedorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 10), new java.awt.Color(0, 0, 0))); // NOI18N
+        endereço_fornecedorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 10))); // NOI18N
 
         ruaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ruaLabel.setText("Rua");
@@ -367,11 +367,12 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                         .addComponent(bairroLabel)
                         .addComponent(bairroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cidadeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(telefoneFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefoneLabel)
-                    .addComponent(cidadeLabel)))
+                    .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cidadeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(telefoneLabel)
+                        .addComponent(cidadeLabel))))
         );
 
         dataFormattedTextField.setEditable(false);
@@ -479,7 +480,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             return false;
         }
     }
-
+    
     public static void limpa() {
         dataFormattedTextField.setText("");
         cod_fornecedorTextField.setText("");
@@ -494,12 +495,12 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         cidadeTextField.setText("");
         estadoComboBox.setSelectedIndex(0);
     }
-
+    
     public static void editarSalvar() {
         salvarButton.setVisible(false);
         editar_Button.setVisible(true);
     }
-
+    
     public static void setEdição(boolean estado) {
         cod_fornecedorTextField.setEditable(estado);
         dataFormattedTextField.setEditable(estado);
@@ -518,7 +519,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         int eliminar = JOptionPane.showConfirmDialog(null, "Deseja realmente apagar este registro", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (eliminar == JOptionPane.YES_OPTION) {
             String mensagem_erro = controlador.removerFornecedor(Integer.valueOf(cod_fornecedorTextField.getText()).intValue());
-
+            
             if (mensagem_erro != null) {
                 JOptionPane.showMessageDialog(this, mensagem_erro, "ERRO", JOptionPane.ERROR_MESSAGE);
             } else {
@@ -526,7 +527,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                 limpa();
                 eliminarButton.setEnabled(false);
                 editar_Button.setEnabled(false);
-
+                
             }
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
@@ -580,10 +581,11 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         cnpjFormattedTextField.setText(fornecedor.getN_documento());
         setEdição(false);
         editarSalvar();
-
+        
     }
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        new JanelaConsultaFornecedor().setVisible(true);
+        JanelaConsulta<Fornecedor> consulta = new JanelaConsulta<Fornecedor>(new Fornecedor());
+        consulta.setVisible(true);
         limpa();
     }//GEN-LAST:event_consultarButtonActionPerformed
 
@@ -593,14 +595,14 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         String mensagem_erro = null;
         if (numeroTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Não pode conter registros em branco", "Atenção", JOptionPane.WARNING_MESSAGE);
-
+            
         }
         Fornecedor fornecedor = new Fornecedor(Integer.valueOf(cod_fornecedorTextField.getText()).intValue(),
                 Integer.valueOf(numeroTextField.getText()).intValue(), nome_fornecedorTextField.getText(), dataFormattedTextField.getText(), cnpjFormattedTextField.getText(),
                 ruaTextField.getText(), bairroTextField.getText(), telefoneFormattedTextField.getText(),
                 cepFormattedTextField.getText(), estadoComboBox.getSelectedItem().toString(),
                 cidadeTextField.getText(), email_fornecedorTextField.getText());
-
+        
         if (!dadosOK(fornecedor)) {
             mensagem_erro = "Não pode conter registros em branco";
         } else {
@@ -611,7 +613,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, nome_fornecedorTextField.getText() + " Cadastrado com sucesso");
         }
-
+        
         limpa();
         setAtivo(false);
         novoButton.setEnabled(true);
@@ -644,7 +646,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, nome_fornecedorTextField.getText() + " alterado com sucesso");
         }
-
+        
         setEdição(false);
         editarSalvar();
     }//GEN-LAST:event_salvarButtonActionPerformed
@@ -689,14 +691,14 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                     bairroTextField.setText(buscaCEP.getBairro(cep).replace("Ã£", "ã"));
                     estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
                     cidadeTextField.setText(buscaCEP.getCidade(cep).replace("Ã£", "ã"));
-
+                    
                 } else {
-                    JOptionPane.showMessageDialog(this,"Cep "+cep+" não encontrado ");
+                    JOptionPane.showMessageDialog(this, "Cep " + cep + " não encontrado ");
                 }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao buscar endereço: " + ex);
             }
-
+            
         }
     }//GEN-LAST:event_buscacepjLabelMouseClicked
 

@@ -32,6 +32,9 @@ public class Produto {
         this.código = código;
     }
 
+    public Produto() {
+    }
+
 
 
     public Produto(int código, float estoque, float preço_venda, String nome, String marca) {

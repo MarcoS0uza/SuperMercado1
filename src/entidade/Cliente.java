@@ -91,6 +91,65 @@ public class Cliente extends FichaCadastro {
         return cliente;
     }
 
+    public static ArrayList<Cliente> buscarTodosCliente(Cliente cliente) {
+        DateFormat dn = new SimpleDateFormat("dd/MM/yyyy");//Formato da função format() para converter o formato Mysql para o usual no Brasil
+        String sql;
+        if (cliente == null){
+            sql = "SELECT * FROM clientes";
+        }else{
+            sql = "SELECT * FROM clientes where";
+                
+            if (!cliente.getNome().equals("")){sql+=" and nome_cliente like '"+cliente.getNome()+"%'";}
+            if (!cliente.getN_documento().trim().equals("")){sql+=" and n_documento_cliente = '"+cliente.getN_documento()+"'";}
+            if (cliente.getTipo_cliente() != null){sql+=" and tipo_cliente = '"+cliente.getTipo_cliente()+"'";}
+            if (!cliente.getData_cadastro().equals("")){sql+=" and data_cadastro_cliente = '"+cliente.getData_cadastro()+"'";}
+            if (!cliente.getEmail().equals("")){sql+=" and email_cliente like '"+cliente.getEmail()+"%'";}
+            if (!cliente.getEndereço().equals("")){sql+=" and endereco_cliente like '"+cliente.getEndereço()+"%'";}
+            if (!cliente.getBairro().equals("")){sql+=" and bairro_cliente like '"+cliente.getBairro()+"%'";}
+            if (cliente.getNumero() != -1){sql+=" and numero_cliente = "+cliente.getNumero();}
+            if (!cliente.getCep().trim().equals("")){sql+=" and cep_cliente = '"+cliente.getCep()+"'";}
+            if (cliente.getSexo() != null){sql+=" and sexo = '"+cliente.getSexo()+"'";}
+            if (!cliente.getTelefone().trim().equals("")){sql+=" and telefone_cliente = '"+cliente.getTelefone()+"'";}
+            if (cliente.getCidade() != null){sql+=" and cidade_cliente = '"+cliente.getCidade()+"'";}
+            if (cliente.getEstado() != null){sql+=" and estado_cliente = '"+cliente.getEstado()+"'";}
+            
+            
+            System.out.println(sql.replace("where and", "where"));
+        }
+
+        ResultSet lista_resultados;
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        Cliente cliente2 = null;
+        try {
+            lista_resultados = BD.comando.executeQuery(sql.replace("where and", "where"));
+            while (lista_resultados.next()) {
+
+                cliente2 = new Cliente(
+                        lista_resultados.getString("tipo_cliente"),
+                        lista_resultados.getString("sexo"),
+                        lista_resultados.getInt("cod_cliente"),
+                        lista_resultados.getInt("numero_cliente"),
+                        lista_resultados.getString("nome_cliente"),
+                        dn.format(lista_resultados.getDate("data_cadastro_cliente")).toString(),//Pega um Date() formata a data e coverte para String
+                        lista_resultados.getString("n_documento_cliente"),
+                        lista_resultados.getString("endereco_cliente"),
+                        lista_resultados.getString("bairro_cliente"),
+                        lista_resultados.getString("telefone_cliente"),
+                        lista_resultados.getString("cep_cliente"),
+                        lista_resultados.getString("estado_cliente"),
+                        lista_resultados.getString("cidade_cliente"),
+                        lista_resultados.getString("email_cliente"));
+                
+                clientes.add(cliente2);
+            }
+            lista_resultados.close();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage());
+            cliente2 = null;
+        }
+        return clientes;
+    }
+    
     //retorna novo cod para inserir no BD (o maior codigo do cliente + 1), já convertido em String ou mensagem do SQLException caso caia na excessão
     public static String id() {
         String codigo = null;
@@ -243,4 +302,25 @@ public class Cliente extends FichaCadastro {
     public String getCidade() {
         return cidade;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "tipo_cliente=" + tipo_cliente + 
+                " sexo=" + sexo + 
+                " codigo=" + código + 
+                " numero=" + numero + 
+                " nome=" + nome + 
+                " n_documento=" + n_documento + 
+                " endereço=" + endereço + 
+                " bairro=" + bairro + 
+                " telefone=" + telefone + 
+                " cep=" + cep + 
+                " estado=" + estado + 
+                " cidade=" + cidade + 
+                " email=" + email + 
+                " data_cadastro=" + data_cadastro;
+    }
+
+    
+    
 }

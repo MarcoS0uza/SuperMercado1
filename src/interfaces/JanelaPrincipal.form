@@ -18,7 +18,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastro"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -31,10 +31,7 @@
                   <KeyStroke key="Ctrl+C"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/Clients-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
@@ -48,10 +45,7 @@
                   <KeyStroke key="Ctrl+F"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/suitcase-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fornecedor"/>
               </Properties>
@@ -65,10 +59,7 @@
                   <KeyStroke key="Ctrl+P"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/product-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Produto"/>
               </Properties>
@@ -82,10 +73,7 @@
                   <KeyStroke key="Ctrl+U"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/User-Executive-Green-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
               </Properties>
@@ -99,10 +87,7 @@
                   <KeyStroke key="Ctrl+Alt+V"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/vendedor.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Vendedor"/>
               </Properties>
@@ -116,7 +101,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -129,10 +114,7 @@
                   <KeyStroke key="Ctrl+V"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/Cash-register-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Venda"/>
               </Properties>
@@ -149,10 +131,7 @@
                   <KeyStroke key="Ctrl+Alt+C"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/shopping-cart-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compra"/>
               </Properties>
@@ -169,10 +148,7 @@
                   <KeyStroke key="Ctrl+E"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/item-configuration-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ajuste de Estoque"/>
               </Properties>
@@ -186,7 +162,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -197,7 +173,7 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastro"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -207,10 +183,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="cad_clienteMenuItem">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="15" style="0"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/interfaces/img/cliente-report-icon.png"/>
+                      <Font name="Segoe UI Light" size="15" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cliente"/>
                   </Properties>
@@ -221,10 +194,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="cad_fornecedorMenuItem">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="15" style="0"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/interfaces/img/forns-icon.png"/>
+                      <Font name="Segoe UI Light" size="15" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fornecedor"/>
                   </Properties>
@@ -232,10 +202,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="cad_produtosMenuItem">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="15" style="0"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/interfaces/img/product-sales-report-icon.png"/>
+                      <Font name="Segoe UI Light" size="15" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Produtos"/>
                   </Properties>
@@ -243,10 +210,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="cad_usuarioMenuItem">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="15" style="0"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/interfaces/img/cliente-report-icon.png"/>
+                      <Font name="Segoe UI Light" size="15" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
                   </Properties>
@@ -256,10 +220,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="rel_vendaMenuItem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/venda-report-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Venda"/>
               </Properties>
@@ -270,10 +231,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="rel_compraMenuItem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/report-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compra"/>
               </Properties>
@@ -290,17 +248,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Backup"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="backupMenuItem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/Data-Add-database-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Backup"/>
               </Properties>
@@ -311,10 +266,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="restoreMenuItem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/Data-Database-backup-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Restore"/>
               </Properties>
@@ -328,7 +280,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -338,10 +290,7 @@
                   <KeyStroke key="Shift+Ctrl+C"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/application-settings-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
               </Properties>
@@ -355,7 +304,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Sair"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="17" style="0"/>
+              <Font name="Segoe UI" size="16" style="0"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -365,10 +314,7 @@
                   <KeyStroke key="Ctrl+L"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/Log-Out-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
@@ -382,10 +328,7 @@
                   <KeyStroke key="Ctrl+S"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="17" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/interfaces/img/logout-icon.png"/>
+                  <Font name="Segoe UI Light" size="15" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair do Sistema"/>
               </Properties>
@@ -473,7 +416,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="user_logadoPanel" min="-2" pref="69" max="-2" attributes="0"/>
-                  <EmptySpace pref="648" max="32767" attributes="0"/>
+                  <EmptySpace pref="646" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

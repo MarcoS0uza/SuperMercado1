@@ -96,34 +96,41 @@ public class JanelaCadastroProduto extends javax.swing.JFrame {
         setResizable(false);
 
         dadosPanel.setBackground(new java.awt.Color(255, 255, 255));
-        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12), java.awt.Color.black)); // NOI18N
+        dadosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cadastro de Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
 
+        cod_produtoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cod_produtoLabel.setText("Código");
 
         cod_produtoTextField.setEditable(false);
         cod_produtoTextField.setEnabled(false);
 
+        nome_produtoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nome_produtoLabel.setText("Nome");
 
         nome_produtoTextField.setEnabled(false);
 
+        custo_produtoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         custo_produtoLabel.setText("Custo R$");
 
         custo_produtoTextField.setEnabled(false);
 
+        preço_vendaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         preço_vendaLabel.setText("Venda R$");
 
         preço_vendaTextField.setEnabled(false);
 
+        un_produtoLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         un_produtoLabel.setText("Unidade");
 
         un_produtoComboBox.setModel(new DefaultComboBoxModel(FichaCadastro.Unidade.values()));
         un_produtoComboBox.setEnabled(false);
 
+        estoqueLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         estoqueLabel.setText("Estoque");
 
         estoqueTextField.setEnabled(false);
 
+        marcaLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         marcaLabel.setText("Marca");
 
         marcaTextField.setEnabled(false);
@@ -464,7 +471,7 @@ public class JanelaCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_novoButtonActionPerformed
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        JanelaConsultaProduto jProduto = new JanelaConsultaProduto();
+        JanelaConsulta<Produto> jProduto = new JanelaConsulta<Produto>(new Produto());
         jProduto.setTitle("Consulta Produto");
         jProduto.setVisible(true);
         limpa();
