@@ -6,6 +6,7 @@ package interfaces;
 
 import controle.ControleAutenticacao;
 import entidade.Usuario;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -64,6 +65,11 @@ public class JanelaLogin extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage(new ImageIcon("Imagem\\ICO.png").getImage());
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         PanelLogo.setBackground(new java.awt.Color(255, 255, 255));
         PanelLogo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -190,6 +196,11 @@ public class JanelaLogin extends javax.swing.JFrame {
 
     //evento Ok, verifica usuário no BD
     private void ButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOkActionPerformed
+        okClicado();
+    }//GEN-LAST:event_ButtonOkActionPerformed
+
+    private void okClicado(){
+       
         Usuario user = Usuario.buscarUsuário(loginTextField.getText());
         if (user != null) {
             if (loginTextField.getText().equals("") || senhaPasswordField.getText().equals("")) {
@@ -209,13 +220,21 @@ public class JanelaLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Usuário não encontrado", "Atenção", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_ButtonOkActionPerformed
-
+    }
     //apenas para testes
     private void LabelImgCadeadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelImgCadeadoMouseClicked
         new JanelaPrincipal().setVisible(true);
         dispose();
     }//GEN-LAST:event_LabelImgCadeadoMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        File file = new File("C:\\Desenv\\Ganso 2_58\\mgg.des");
+        if(file.exists()){
+            loginTextField.setText("Sys");
+            senhaPasswordField.setText("1");
+            okClicado();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables

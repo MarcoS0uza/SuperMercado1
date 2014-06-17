@@ -28,7 +28,7 @@ public class ControleAutenticacao {
     }
 
     public int autenticaçaoUsuário(Usuario user) {
-        String sql = "SELECT COUNT(cod_user)FROM usuario WHERE nome_user='" + user.getNome() + "' AND senha_user='" + user.getSenha() + "';";
+        String sql = "SELECT COUNT(cod_user)FROM usuarios WHERE nome_user='" + user.getNome() + "' AND senha_user='" + user.getSenha() + "';";
         int resultado = 0;
         try {
             ResultSet resultado_busca = BD.comando.executeQuery(sql);
