@@ -13,9 +13,9 @@ import interfaces.JanelaVenda;
  * @author MARCOANTONIO
  */
 public class ControladorVenda {
-
-    public ControladorVenda() {
-        new JanelaVenda(this).setVisible(true);
+    
+    public ControladorVenda(String caminho) {
+        new JanelaVenda(this, caminho).setVisible(true);
     }
     
     

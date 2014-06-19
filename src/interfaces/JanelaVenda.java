@@ -16,9 +16,11 @@ import relatorios.AbreRelatorio;
 public class JanelaVenda extends javax.swing.JFrame {
 
     ControladorVenda controlador;
+    String caminho;
 
-    public JanelaVenda(ControladorVenda controlador) {
+    public JanelaVenda(ControladorVenda controlador, String caminho) {
         this.controlador = controlador;
+        this.caminho = caminho;
         initComponents();
         setLocationRelativeTo(null);
         //iniciaTabela();
@@ -820,7 +822,7 @@ public class JanelaVenda extends javax.swing.JFrame {
                     if (erro.equals("")) {
                         int imprimir = JOptionPane.showConfirmDialog(null, "Deseja imprimir o pedido da venda", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (imprimir == JOptionPane.YES_OPTION) {
-                            AbreRelatorio.pedido(venda);
+                            new AbreRelatorio(caminho).pedido(venda);
                             cont = 0;
                             limpaVenda();
 

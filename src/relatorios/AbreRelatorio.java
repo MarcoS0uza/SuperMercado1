@@ -23,7 +23,9 @@ import persistencia.BD;
  */
 public class AbreRelatorio {
 
-    public static void rel_cliente() {
+    public String caminho; 
+    
+    public void rel_cliente() {
         try {
             String sql = "select c.cod_cliente,"
                     + "c.nome_cliente,"
@@ -33,7 +35,7 @@ public class AbreRelatorio {
                     + "c.estado_cliente\n"
                     + "from clientes c ";
             JRResultSetDataSource relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
-            JasperPrint mostra_rel = JasperFillManager.fillReport("relatorios/Clientes.jasper", new HashMap(), relatorioResult);
+            JasperPrint mostra_rel = JasperFillManager.fillReport(caminho+"/Clientes.jasper", new HashMap(), relatorioResult);
             JasperViewer jv = new JasperViewer(mostra_rel, false);
             jv.setTitle("Relatório de Clientes");
             jv.setExtendedState(MAXIMIZED_BOTH);
@@ -44,7 +46,7 @@ public class AbreRelatorio {
         }
     }
 
-    public static void pedido(Venda venda) {
+    public void pedido(Venda venda) {
         try {
             String sql = "select cod_venda,data_venda,hora_venda,"
                     + "	total_venda_liq,\n"
@@ -74,7 +76,7 @@ public class AbreRelatorio {
                     + "left join clientes c on c.cod_cliente=v.clientes_cod\n"
                     + "where v.cod_venda="+venda.getCódigo()+";";
             JRResultSetDataSource relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
-            JasperPrint mostra_rel = JasperFillManager.fillReport("relatorios/Pedido.jasper", new HashMap(), relatorioResult);
+            JasperPrint mostra_rel = JasperFillManager.fillReport(caminho+"/Pedido.jasper", new HashMap(), relatorioResult);
             JasperViewer jv = new JasperViewer(mostra_rel, false);
             jv.setTitle("Pedidode de venda");
             jv.setExtendedState(MAXIMIZED_BOTH);
@@ -85,4 +87,15 @@ public class AbreRelatorio {
         }
     }
 
+    public AbreRelatorio(String caminho) {
+        this.caminho = caminho;
+        
+    }
+
+    
+
+    
+
+    
+    
 }

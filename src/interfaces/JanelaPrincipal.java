@@ -10,6 +10,10 @@ import controle.ControladorCadastroUsuário;
 import controle.ControladorVenda;
 import controle.ControleAutenticacao;
 import entidade.Usuario;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import org.ini4j.Wini;
 import persistencia.BD;
 import relatorios.AbreRelatorio;
 
@@ -18,11 +22,19 @@ import relatorios.AbreRelatorio;
  * @author MARCOANTONIO
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
-    static int cont =1;
+
+     Wini ini;
+     String caminho;
     
     public JanelaPrincipal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);//maximiza janela
+         try {
+             ini = new Wini(new File("Config.ini"));
+             caminho = ini.get("RELATORIOS", "caminho");
+         } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null,ex);
+         }
 
     }
 
@@ -363,7 +375,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         BD.fecharComandoConexão();
-        cont = 0;
     }//GEN-LAST:event_formWindowClosing
 
     private void abrirFornecedor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirFornecedor
@@ -384,7 +395,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutMenuItemActionPerformed
 
     private void vendaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendaMenuItemActionPerformed
-        new ControladorVenda();
+        new ControladorVenda(caminho);
     }//GEN-LAST:event_vendaMenuItemActionPerformed
 
     private void sairMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuItemActionPerformed
@@ -396,7 +407,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_compraMenuItemActionPerformed
 
     private void cad_clienteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cad_clienteMenuItemActionPerformed
-        AbreRelatorio.rel_cliente();
+        new AbreRelatorio(caminho).rel_cliente();
     }//GEN-LAST:event_cad_clienteMenuItemActionPerformed
 
     private void backupMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupMenuItemActionPerformed

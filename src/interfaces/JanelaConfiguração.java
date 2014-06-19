@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import org.ini4j.Wini;
 
 /**
@@ -19,8 +20,10 @@ import org.ini4j.Wini;
  * @author MARCOANTONIO
  */
 public class JanelaConfiguração extends javax.swing.JFrame {
+
     Wini ini;
     JanelaPrincipal jp;
+
     /**
      * Creates new form JanelaConfiguração
      */
@@ -30,11 +33,11 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         carregaIni();
         testButton.setVisible(false);
-        
+
     }
 
-     private void carregaIni() {
-        
+    private void carregaIni() {
+
         try {
             ini = new Wini(new File("Config.ini"));
             nome_bancoTextField.setText(ini.get("BANCO", "nome_banco"));
@@ -42,11 +45,13 @@ public class JanelaConfiguração extends javax.swing.JFrame {
             portaTextField.setText(ini.get("BANCO", "porta"));
             userTextField.setText(ini.get("BANCO", "user"));
             senhaPasswordField.setText(ini.get("BANCO", "senha"));
+            caminho_relTextField.setText(ini.get("RELATORIOS", "caminho"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +72,10 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         userTextField = new javax.swing.JTextField();
         senhaPasswordField = new javax.swing.JPasswordField();
         testButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        caminho_relTextField = new javax.swing.JTextField();
+        carregaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurações");
@@ -135,7 +144,6 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         userTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         senhaPasswordField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        senhaPasswordField.setText("marco");
 
         testButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         testButton.setText("Testar conexão");
@@ -167,7 +175,7 @@ public class JanelaConfiguração extends javax.swing.JFrame {
                         .addComponent(testButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(senhaPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                         .addComponent(userTextField, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +206,44 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Conexão BD", jPanel2);
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setText("Caminho");
+
+        caminho_relTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        carregaButton.setText("...");
+        carregaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carregaButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(caminho_relTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(carregaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 19, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(caminho_relTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(carregaButton))
+                .addContainerGap(156, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Relatório", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -241,11 +287,12 @@ public class JanelaConfiguração extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ini.put("BANCO", "nome_banco",nome_bancoTextField.getText());
-        ini.put("BANCO", "host",hostTextField.getText());
-        ini.put("BANCO", "porta",portaTextField.getText());
-        ini.put("BANCO", "user",userTextField.getText());
-        ini.put("BANCO", "senha", senhaPasswordField.getText());
+        ini.put("BANCO", "nome_banco", nome_bancoTextField.getText());
+        ini.put("BANCO", "host", hostTextField.getText());
+        ini.put("BANCO", "porta", portaTextField.getText());
+        ini.put("BANCO", "user", userTextField.getText());
+        ini.put("BANCO", "senha", senhaPasswordField.getText().toString());
+        ini.put("RELATORIOS", "caminho",caminho_relTextField.getText());
         try {
             ini.store();
         } catch (IOException ex) {
@@ -253,30 +300,40 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "O sistema vai ser reiniciado");
         dispose();
-        if (jp != null){
+        if (jp != null) {
             jp.dispose();
-        }else{
-            
+        } else {
+
         }
         ControleAutenticacao.main();
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    
+
+    
+        
+    
     private void portaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portaTextFieldActionPerformed
 
     private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
-        
+
         if (BD.testaConexao()) {
             JOptionPane.showMessageDialog(null, "Conectado com sucesso !!!");
-        } 
-        
+        }
+
     }//GEN-LAST:event_testButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.exit(1);
-        BD.fecharComandoConexão();
+        if (jp != null) {
+            dispose();
+        } else {
+            System.exit(1);
+            BD.fecharComandoConexão();
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void hostTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hostTextFieldActionPerformed
@@ -284,23 +341,30 @@ public class JanelaConfiguração extends javax.swing.JFrame {
     }//GEN-LAST:event_hostTextFieldActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+
     }//GEN-LAST:event_formWindowClosing
 
-    public void salvarConfig() {
+    private void carregaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregaButtonActionPerformed
+       JFileChooser chooser;
+        chooser = new JFileChooser();
+        String caminho = "";
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retorno = chooser.showOpenDialog(null);
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            caminho = chooser.getSelectedFile().getAbsolutePath();
+            caminho_relTextField.setText(caminho);
+        }
+    }//GEN-LAST:event_carregaButtonActionPerformed
 
-    }
-
-    public void carregaConfig() {
-
-    }
+   
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField caminho_relTextField;
+    private javax.swing.JButton carregaButton;
     public static javax.swing.JTextField hostTextField;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -309,8 +373,10 @@ public class JanelaConfiguração extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextField nome_bancoTextField;
     public static javax.swing.JTextField portaTextField;
