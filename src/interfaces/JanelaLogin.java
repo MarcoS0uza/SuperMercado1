@@ -30,13 +30,7 @@ public class JanelaLogin extends javax.swing.JFrame {
         //pega tema de janela do usuario
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JanelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(JanelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(JanelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(JanelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -49,7 +43,6 @@ public class JanelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         PanelLogo = new javax.swing.JPanel();
-        LabelLogo = new javax.swing.JLabel();
         PanelLogin = new javax.swing.JPanel();
         LabelLogin = new javax.swing.JLabel();
         LabelSenha = new javax.swing.JLabel();
@@ -74,21 +67,15 @@ public class JanelaLogin extends javax.swing.JFrame {
         PanelLogo.setBackground(new java.awt.Color(255, 255, 255));
         PanelLogo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        LabelLogo.setBackground(new java.awt.Color(255, 255, 255));
-        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaces/logoLogin.png"))); // NOI18N
-        LabelLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout PanelLogoLayout = new javax.swing.GroupLayout(PanelLogo);
         PanelLogo.setLayout(PanelLogoLayout);
         PanelLogoLayout.setHorizontalGroup(
             PanelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelLogoLayout.createSequentialGroup()
-                .addComponent(LabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 324, Short.MAX_VALUE)
         );
         PanelLogoLayout.setVerticalGroup(
             PanelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, Short.MAX_VALUE)
+            .addGap(0, 99, Short.MAX_VALUE)
         );
 
         PanelLogin.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,7 +159,7 @@ public class JanelaLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(PanelLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(PanelLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, Short.MAX_VALUE)
                     .addComponent(PanelLogo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -242,7 +229,6 @@ public class JanelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton ButtonOk;
     private javax.swing.JLabel LabelImgCadeado;
     private javax.swing.JLabel LabelLogin;
-    private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelSenha;
     private javax.swing.JPanel PanelLogin;
     private javax.swing.JPanel PanelLogo;

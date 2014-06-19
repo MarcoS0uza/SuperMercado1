@@ -18,10 +18,8 @@ import relatorios.AbreRelatorio;
  * @author MARCOANTONIO
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form JanelaPrincipal
-     */
+    static int cont =1;
+    
     public JanelaPrincipal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);//maximiza janela
@@ -365,6 +363,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         BD.fecharComandoConexão();
+        cont = 0;
     }//GEN-LAST:event_formWindowClosing
 
     private void abrirFornecedor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirFornecedor
@@ -417,7 +416,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        
+        new JanelaConfiguração(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

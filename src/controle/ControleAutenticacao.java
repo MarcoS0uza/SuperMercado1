@@ -7,6 +7,8 @@ package controle;
 import entidade.Usuario;
 import interfaces.JanelaConfiguração;
 import interfaces.JanelaLogin;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.ini4j.Wini;
 import persistencia.BD;
 
 /**
@@ -21,6 +24,28 @@ import persistencia.BD;
  * @author Marco Antonio
  */
 public class ControleAutenticacao {
+
+    public static void main() {
+        try {
+            Wini ini = new Wini(new File("Config.ini"));
+            BD bd = new BD();
+            bd.setURL_BANCO("jdbc:mysql://"+ini.get("BANCO", "host")+":"+ini.get("BANCO", "porta")+"/"+ini.get("BANCO", "nome_banco"));
+            bd.setUSER(ini.get("BANCO", "user"));
+            bd.setSENHA(ini.get("BANCO", "senha"));
+            
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (BD.testaConexao()) {
+            new ControleAutenticacao();
+        } else {
+            new JanelaConfiguração(null).setVisible(true);
+        }
+    }
 
     public ControleAutenticacao() {
         new JanelaLogin(this).setVisible(true);
@@ -42,23 +67,27 @@ public class ControleAutenticacao {
         return resultado;
     }
 
+   
+
     public static void main(String[] args) {
         try {
+            Wini ini = new Wini(new File("Config.ini"));
+            BD bd = new BD();
+            bd.setURL_BANCO("jdbc:mysql://"+ini.get("BANCO", "host")+":"+ini.get("BANCO", "porta")+"/"+ini.get("BANCO", "nome_banco"));
+            bd.setUSER(ini.get("BANCO", "user"));
+            bd.setSENHA(ini.get("BANCO", "senha"));
+            
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (BD.testaConexao()) {
             new ControleAutenticacao();
         } else {
-            new JanelaConfiguração().setVisible(true);
+            new JanelaConfiguração(null).setVisible(true);
         }
 
     }
