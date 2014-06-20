@@ -10,8 +10,13 @@ import controle.ControladorCadastroUsuário;
 import controle.ControladorVenda;
 import controle.ControleAutenticacao;
 import entidade.Usuario;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import org.ini4j.Wini;
 import persistencia.BD;
@@ -23,18 +28,19 @@ import relatorios.AbreRelatorio;
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
 
-     Wini ini;
-     String caminho;
-    
+    Wini ini;
+    String caminho;
+
     public JanelaPrincipal() {
         initComponents();
+        setIconImage(imgJanela());
         setExtendedState(MAXIMIZED_BOTH);//maximiza janela
-         try {
-             ini = new Wini(new File("Config.ini"));
-             caminho = ini.get("RELATORIOS", "caminho");
-         } catch (IOException ex) {
-             JOptionPane.showMessageDialog(null,ex);
-         }
+        try {
+            ini = new Wini(new File("Config.ini"));
+            caminho = ini.get("RELATORIOS", "caminho");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
 
     }
 
@@ -348,6 +354,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //define os acessos dos usuários
+
     public static void usuario(Usuario user) {
         nome_userLabel.setText(user.getNome());
         cargoLabel.setText(user.getCargo());
@@ -429,6 +436,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         new JanelaConfiguração(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    public static Image imgJanela() {
+        try {
+            File img_file = new File("img/olhodetandera.jpg");
+            return ImageIO.read(img_file); 
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+            return null;
+        }
+    }
 
     /**
      * @param args the command line arguments
