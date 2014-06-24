@@ -36,7 +36,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
         salvarButton.setVisible(false);
         buscarButton.setVisible(false);
         imprimirButton.setEnabled(false);
-        cancelaButton.setEnabled(true);
+        cancelaButton.setEnabled(false);
         setIconImage(imgJanela());
         limpa();
      
@@ -1220,6 +1220,7 @@ public class JanelaCadastroCliente_ extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         cont = 0;
+        JanelaPrincipal.controleCliente = null;
     }//GEN-LAST:event_formWindowClosed
 
     private void primeiroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeiroButtonActionPerformed

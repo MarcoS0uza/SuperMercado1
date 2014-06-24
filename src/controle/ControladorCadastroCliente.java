@@ -4,9 +4,11 @@ import entidade.Cliente;
 import interfaces.JanelaCadastroCliente_;
 
 public class ControladorCadastroCliente {
-
+    
+    
     public ControladorCadastroCliente() {
         new JanelaCadastroCliente_(this).setVisible(true);
+ 
     }
 
     public String inserirCliente(Cliente cliente) {

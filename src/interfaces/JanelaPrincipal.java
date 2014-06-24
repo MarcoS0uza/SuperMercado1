@@ -28,10 +28,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     Wini ini;
     static String caminho;
-    static Label nome_userLabel = new Label("",1);
-    
-    private ControladorCadastroCliente cadastroCliente;
-    
+    static Label nome_userLabel = new Label("", 1);
+    public static ControladorCadastroCliente controleCliente = null;
+    public static ControladorCadastroFornecedor controleFornecedor = null;
+    public static ControladorCadastroProduto controleProduto = null;
+    public static ControladorCadastroUsuário controleUsuário = null;
+    public static ControladorVenda controleVenda = null;
+
     public JanelaPrincipal() {
         initComponents();
         setIconImage(imgJanela());
@@ -43,13 +46,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-
         jMenuBar1.add(nome_userLabel);
-       // jMenuBar1.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
-   
+        // jMenuBar1.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
 
-
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -348,10 +347,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         }
     }
-
+    
     private void abrirCliente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirCliente
-     
-        new ControladorCadastroCliente();
+        if (controleCliente == null) {
+            controleCliente = new ControladorCadastroCliente();
+        }else{
+            JOptionPane.showMessageDialog(null, "Janela cadastro de cliente já foi aberta");
+        }
+        
     }//GEN-LAST:event_abrirCliente
 
     private void rel_compraMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rel_compraMenuItemActionPerformed
@@ -417,9 +420,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     public Image imgJanela() {
         try {
-            return ImageIO.read(this.getClass().getResource("/imagens/olhodetandera.jpg")); 
+            return ImageIO.read(this.getClass().getResource("/imagens/olhodetandera.jpg"));
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
             return null;
         }
     }
