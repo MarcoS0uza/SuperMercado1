@@ -1,13 +1,20 @@
- package controle;
- 
- import entidade.Usuario;
-import interfaces.JanelaCadastroUsuário;
- 
- public class ControladorCadastroUsuário
- {
-   public ControladorCadastroUsuário() {
-        new JanelaCadastroUsuário(this).setVisible(true);
+package controle;
+
+import entidade.Usuario;
+import interfaces.CadastroUsuário;
+import interfaces.JanelaPrincipal;
+import java.awt.Dimension;
+
+public class ControladorCadastroUsuário {
+
+    public ControladorCadastroUsuário() {
+        //new JanelaCadastroUsuário(this).setVisible(true);
+        Dimension d = JanelaPrincipal.jDesktopPane1.getSize();
+        CadastroUsuário cu = new CadastroUsuário(this);
+        cu.setLocation((d.width - cu.getSize().width) / 2, ((d.height - cu.getSize().height) / 2) - 100);
+        cu.setVisible(true);
     }
+
 
     public String inserirUsuário(Usuario usuário) {
         boolean jaTem;
@@ -39,5 +46,4 @@ import interfaces.JanelaCadastroUsuário;
             return "Usuário não cadastrado";
         }
     }
- }
-
+}

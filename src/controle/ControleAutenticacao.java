@@ -4,6 +4,7 @@
  */
 package controle;
 
+import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import entidade.Usuario;
 import interfaces.JanelaConfiguração;
 import interfaces.JanelaLogin;
@@ -18,7 +19,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.ini4j.Wini;
 import persistencia.BD;
-import relatorios.AbreRelatorio;
 
 /**
  *
@@ -79,8 +79,10 @@ public class ControleAutenticacao {
             bd.setUSER(ini.get("BANCO", "user"));
             bd.setSENHA(ini.get("BANCO", "senha"));
             
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            
+
+            UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
+        } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);

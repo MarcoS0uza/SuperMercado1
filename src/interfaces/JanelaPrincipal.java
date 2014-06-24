@@ -11,11 +11,9 @@ import controle.ControladorVenda;
 import controle.ControleAutenticacao;
 import entidade.Usuario;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
+import java.awt.Label;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import org.ini4j.Wini;
@@ -29,8 +27,11 @@ import relatorios.AbreRelatorio;
 public class JanelaPrincipal extends javax.swing.JFrame {
 
     Wini ini;
-    String caminho;
-
+    static String caminho;
+    static Label nome_userLabel = new Label("",1);
+    
+    private ControladorCadastroCliente cadastroCliente;
+    
     public JanelaPrincipal() {
         initComponents();
         setIconImage(imgJanela());
@@ -42,6 +43,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
 
+
+        jMenuBar1.add(nome_userLabel);
+       // jMenuBar1.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
+   
+
+
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -49,10 +57,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
-        user_logadoPanel = new javax.swing.JPanel();
-        nome_userLabel = new javax.swing.JLabel();
-        cargoLabel = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -91,45 +96,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jDesktopPane1.setPreferredSize(new java.awt.Dimension(300, 314));
 
-        user_logadoPanel.setBackground(new java.awt.Color(255, 255, 255));
-        user_logadoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário Logado"));
-
-        javax.swing.GroupLayout user_logadoPanelLayout = new javax.swing.GroupLayout(user_logadoPanel);
-        user_logadoPanel.setLayout(user_logadoPanelLayout);
-        user_logadoPanelLayout.setHorizontalGroup(
-            user_logadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(user_logadoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(user_logadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nome_userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(cargoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        user_logadoPanelLayout.setVerticalGroup(
-            user_logadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(user_logadoPanelLayout.createSequentialGroup()
-                .addComponent(nome_userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cargoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(user_logadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(user_logadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(646, Short.MAX_VALUE))
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 314, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -338,15 +316,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -356,8 +332,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     //define os acessos dos usuários
 
     public static void usuario(Usuario user) {
+//        nome_userLabel.setBackground(new Color(240, 240, 240));
         nome_userLabel.setText(user.getNome());
-        cargoLabel.setText(user.getCargo());
+
         switch (user.getCargo()) {
             case "Caixa":
                 cadastroMenu.setEnabled(false);
@@ -373,6 +350,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
 
     private void abrirCliente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirCliente
+     
         new ControladorCadastroCliente();
     }//GEN-LAST:event_abrirCliente
 
@@ -414,7 +392,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_compraMenuItemActionPerformed
 
     private void cad_clienteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cad_clienteMenuItemActionPerformed
-        new AbreRelatorio(caminho).rel_cliente();
+        new AbreRelatorio(caminho).rel_cliente(null);
     }//GEN-LAST:event_cad_clienteMenuItemActionPerformed
 
     private void backupMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupMenuItemActionPerformed
@@ -437,10 +415,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         new JanelaConfiguração(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    public static Image imgJanela() {
+    public Image imgJanela() {
         try {
-            File img_file = new File("img/olhodetandera.jpg");
-            return ImageIO.read(img_file); 
+            return ImageIO.read(this.getClass().getResource("/imagens/olhodetandera.jpg")); 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,ex);
             return null;
@@ -489,8 +466,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cad_produtosMenuItem;
     private javax.swing.JMenuItem cad_usuarioMenuItem;
     public static javax.swing.JMenu cadastroMenu;
-    public static javax.swing.JLabel cargoLabel;
     public static javax.swing.JMenuItem compraMenuItem;
+    public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -500,11 +477,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem logoutMenuItem;
     public static javax.swing.JMenu movimentaçãoMenu;
-    public static javax.swing.JLabel nome_userLabel;
     public static javax.swing.JMenu rel_cadastroMenu;
     public static javax.swing.JMenuItem rel_compraMenuItem;
     public static javax.swing.JMenuItem rel_vendaMenuItem;
@@ -512,7 +487,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem restoreMenuItem;
     private javax.swing.JMenu sairMenu;
     private javax.swing.JMenuItem sairMenuItem;
-    private javax.swing.JPanel user_logadoPanel;
     public static javax.swing.JMenuItem vendaMenuItem;
     // End of variables declaration//GEN-END:variables
 }

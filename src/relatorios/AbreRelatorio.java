@@ -5,15 +5,19 @@
  */
 package relatorios;
 
+import entidade.Cliente;
 import entidade.Venda;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import persistencia.BD;
 
@@ -23,23 +27,42 @@ import persistencia.BD;
  */
 public class AbreRelatorio {
 
-    public String caminho; 
-    
-    public void rel_cliente() {
+    public String caminho;
+
+    public void rel_cliente(ArrayList<Cliente> clientes) {
+        String sql;
+        JasperViewer jv;
         try {
-            String sql = "select c.cod_cliente,"
-                    + "c.nome_cliente,"
-                    + "c.n_documento_cliente,"
-                    + "c.telefone_cliente,"
-                    + "c.cidade_cliente,"
-                    + "c.estado_cliente\n"
-                    + "from clientes c ";
-            JRResultSetDataSource relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
-            JasperPrint mostra_rel = JasperFillManager.fillReport(caminho+"/Clientes.jasper", new HashMap(), relatorioResult);
-            JasperViewer jv = new JasperViewer(mostra_rel, false);
-            jv.setTitle("Relatório de Clientes");
-            jv.setExtendedState(MAXIMIZED_BOTH);
-            jv.show();
+
+            if (clientes == null) {
+                sql = "select c.cod_cliente,"
+                        + "c.nome_cliente,"
+                        + "c.n_documento_cliente,"
+                        + "c.telefone_cliente,"
+                        + "c.cidade_cliente,"
+                        + "c.estado_cliente\n"
+                        + "from clientes c ";
+
+                JRResultSetDataSource relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
+                JasperPrint mostra_rel = JasperFillManager.fillReport(caminho + "/Clientes.jasper", new HashMap(), relatorioResult);
+                jv = new JasperViewer(mostra_rel, false);
+                jv.setTitle("Relatório de Clientes");
+                jv.setExtendedState(MAXIMIZED_BOTH);
+                jv.show();
+            } else {
+               
+                   
+              
+                
+                //relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
+                JRBeanCollectionDataSource relatorioResult = new JRBeanCollectionDataSource(clientes);
+                
+                JasperPrint mostra_rel = JasperFillManager.fillReport(caminho + "/Clientes.jasper", new HashMap(), relatorioResult);
+                jv = new JasperViewer(mostra_rel, false);
+                jv.setTitle("Relatório de Clientes");
+                jv.setExtendedState(MAXIMIZED_BOTH);
+                jv.show();
+            }
 
         } catch (SQLException | JRException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + ex);
@@ -74,9 +97,9 @@ public class AbreRelatorio {
                     + "left join itens_venda vi on vi.venda_cod=v.cod_venda\n"
                     + "left join produtos p on p.cod_produto=vi.produtos_cod\n"
                     + "left join clientes c on c.cod_cliente=v.clientes_cod\n"
-                    + "where v.cod_venda="+venda.getCódigo()+";";
+                    + "where v.cod_venda=" + venda.getCódigo() + ";";
             JRResultSetDataSource relatorioResult = new JRResultSetDataSource(BD.comando.executeQuery(sql));
-            JasperPrint mostra_rel = JasperFillManager.fillReport(caminho+"/Pedido.jasper", new HashMap(), relatorioResult);
+            JasperPrint mostra_rel = JasperFillManager.fillReport(caminho + "/Pedido.jasper", new HashMap(), relatorioResult);
             JasperViewer jv = new JasperViewer(mostra_rel, false);
             jv.setTitle("Pedidode de venda");
             jv.setExtendedState(MAXIMIZED_BOTH);
@@ -89,13 +112,7 @@ public class AbreRelatorio {
 
     public AbreRelatorio(String caminho) {
         this.caminho = caminho;
-        
+
     }
 
-    
-
-    
-
-    
-    
 }
