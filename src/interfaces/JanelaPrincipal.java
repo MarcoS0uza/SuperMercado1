@@ -366,7 +366,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void abrirFornecedor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirFornecedor
-        new ControladorCadastroFornecedor();
+        if (controleFornecedor == null) {
+            controleFornecedor= new ControladorCadastroFornecedor();
+        }else{
+            JOptionPane.showMessageDialog(null, "Janela cadastro de fornecedor já foi aberta");
+        }
+ 
     }//GEN-LAST:event_abrirFornecedor
 
     private void abrirProduto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProduto

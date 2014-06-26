@@ -276,7 +276,7 @@ public class JanelaConsulta<T> extends javax.swing.JFrame {
                 int codigo = Integer.valueOf(codigo_temp).intValue();
                 Cliente cliente = Cliente.buscarCliente(codigo);
                 if (getTitle().equalsIgnoreCase("Clientes")) {
-                    JanelaCadastroCliente_.mostraDados(cliente);
+                    JanelaCadastroCliente.mostraDados(cliente);
                     dispose();
                 } else if (getTitle().equalsIgnoreCase("Selecione o cliente para a venda")) {
                     JanelaVenda.mostraDadosCliente(cliente);

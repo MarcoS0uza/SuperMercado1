@@ -1,13 +1,13 @@
 package controle;
 
 import entidade.Cliente;
-import interfaces.JanelaCadastroCliente_;
+import interfaces.JanelaCadastroCliente;
 
 public class ControladorCadastroCliente {
     
     
     public ControladorCadastroCliente() {
-        new JanelaCadastroCliente_(this).setVisible(true);
+        new JanelaCadastroCliente(this).setVisible(true);
  
     }
 

@@ -31,7 +31,7 @@ public class Fornecedor extends FichaCadastro {
                 + fornecedor.getN_documento() + "','" + fornecedor.getEndereço() + "',"
                 + fornecedor.getNumero() + ",'" + fornecedor.getBairro() + "','" + fornecedor.getCep() + "','" + fornecedor.getTelefone() + "','"
                 + fornecedor.getEstado() + "','" + fornecedor.getCidade() + "','" + fornecedor.getEmail() + "')";
-        //dn.format(Date.parse(cliente.getData_cadastro())) = converte data_cadastro para Date() e também para o formato de data do Mysql com a função format()
+        //dn.format(Date.parse(fornecedore.getData_cadastro())) = converte data_cadastro para Date() e também para o formato de data do Mysql com a função format()
         try {
             BD.comando.executeUpdate(sql);
             return null;
@@ -40,6 +40,60 @@ public class Fornecedor extends FichaCadastro {
         }
     }
 
+
+
+    public static ArrayList<Fornecedor> buscarTodosFornecedores(Fornecedor fornecedor) {
+        DateFormat dn = new SimpleDateFormat("dd/MM/yyyy");//Formato da função format() para converter o formato Mysql para o usual no Brasil
+        String sql;
+        if (fornecedor == null){
+            sql = "SELECT * FROM fornecedor";
+        }else{
+            sql = "SELECT * FROM fornecedor where";
+                
+            if (!fornecedor.getNome().equals("")){sql+=" and nome_fornecedor like '"+fornecedor.getNome()+"%'";}
+            if (!fornecedor.getN_documento().trim().equals("")){sql+=" and cnpj_fornecedor = '"+fornecedor.getN_documento()+"'";}
+            if (!fornecedor.getData_cadastro().equals("")){sql+=" and data_cadastro_fornecedor = '"+fornecedor.getData_cadastro()+"'";}
+            if (!fornecedor.getEmail().equals("")){sql+=" and email_fornecedor like '"+fornecedor.getEmail()+"%'";}
+            if (!fornecedor.getEndereço().equals("")){sql+=" and endereco_fornecedor like '"+fornecedor.getEndereço()+"%'";}
+            if (!fornecedor.getBairro().equals("")){sql+=" and bairro_fornecedor like '"+fornecedor.getBairro()+"%'";}
+            if (fornecedor.getNumero() != -1){sql+=" and numero_fornecedor = "+fornecedor.getNumero();}
+            if (!fornecedor.getCep().trim().equals("")){sql+=" and cep_fornecedor = '"+fornecedor.getCep()+"'";}
+            if (!fornecedor.getTelefone().trim().equals("")){sql+=" and telefone_fornecedor = '"+fornecedor.getTelefone()+"'";}
+            if (fornecedor.getCidade() != null){sql+=" and cidade_fornecedor = '"+fornecedor.getCidade()+"'";}
+            if (fornecedor.getEstado() != null){sql+=" and estado_fornecedor = '"+fornecedor.getEstado()+"'";}
+
+        }
+
+        ResultSet lista_resultados;
+        ArrayList<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+        Fornecedor fornecedor2 = null;
+        try {
+            lista_resultados = BD.comando.executeQuery(sql.replace("where and", "where"));
+            while (lista_resultados.next()) {
+
+                fornecedor2 = new Fornecedor(
+                        lista_resultados.getInt("cod_fornecedor"),
+                        lista_resultados.getInt("numero_fornecedor"),
+                        lista_resultados.getString("nome_fornecedor"),
+                        dn.format(lista_resultados.getDate("data_cadastro_fornecedor")).toString(),//Pega um Date() formata a data e coverte para String
+                        lista_resultados.getString("cnpj_fornecedor"),
+                        lista_resultados.getString("endereco_fornecedor"),
+                        lista_resultados.getString("bairro_fornecedor"),
+                        lista_resultados.getString("telefone_fornecedor"),
+                        lista_resultados.getString("cep_fornecedor"),
+                        lista_resultados.getString("estado_fornecedor"),
+                        lista_resultados.getString("cidade_fornecedor"),
+                        lista_resultados.getString("email_fornecedor"));
+                
+                fornecedores.add(fornecedor2);
+            }
+            lista_resultados.close();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage());
+            fornecedor2 = null;
+        }
+        return fornecedores;
+    }
     //retorna objeto Fornecedor conforme parametro código, ou null se cair na excessão
     public static Fornecedor buscarFornecedor(int código) {
         DateFormat dc = new SimpleDateFormat("dd/MM/yyyy");//Formato da função format() para converter o formato Mysql para o usual no Brasil
@@ -98,7 +152,7 @@ public class Fornecedor extends FichaCadastro {
                 Fornecedor fornecedor = new Fornecedor(rs.getInt("cod_fornecedor"),
                         rs.getString("nome_fornecedor"), dc.format(rs.getDate("data_cadastro_fornecedor")).toString(),
                         rs.getString("cnpj_fornecedor"));
-                fornecedores.add(fornecedor);//adiciona objeto cliente no Array
+                fornecedores.add(fornecedor);//adiciona objeto fornecedore no Array
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -204,4 +258,11 @@ public class Fornecedor extends FichaCadastro {
     public String getCidade() {
         return cidade;
     }
+
+    @Override
+    public String toString() {
+        return "FichaCadastro{" + "c\u00f3digo=" + código + ", numero=" + numero + ", nome=" + nome + ", n_documento=" + n_documento + ", endere\u00e7o=" + endereço + ", bairro=" + bairro + ", telefone=" + telefone + ", cep=" + cep + ", estado=" + estado + ", cidade=" + cidade + ", email=" + email + ", data_cadastro=" + data_cadastro + '}';
+    }
+    
+    
 }
