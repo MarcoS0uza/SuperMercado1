@@ -10,10 +10,16 @@ import interfaces.JanelaConfiguração;
 import interfaces.JanelaLogin;
 import java.io.File;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -25,7 +31,7 @@ import persistencia.BD;
  * @author Marco Antonio
  */
 public class ControleAutenticacao {
-
+    static Tools tools = new Tools();
     
     
     public static void main() {
@@ -34,12 +40,10 @@ public class ControleAutenticacao {
             BD bd = new BD();
             bd.setURL_BANCO("jdbc:mysql://"+ini.get("BANCO", "host")+":"+ini.get("BANCO", "porta")+"/"+ini.get("BANCO", "nome_banco"));
             bd.setUSER(ini.get("BANCO", "user"));
-            bd.setSENHA(ini.get("BANCO", "senha"));
+            bd.setSENHA(tools.decripta(ini.get("BANCO", "senha")));
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | IOException | BadPaddingException | NoSuchPaddingException | IllegalBlockSizeException | InvalidKeyException | NoSuchAlgorithmException | InvalidAlgorithmParameterException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
         if (BD.testaConexao()) {
@@ -77,15 +81,10 @@ public class ControleAutenticacao {
             BD bd = new BD();
             bd.setURL_BANCO("jdbc:mysql://"+ini.get("BANCO", "host")+":"+ini.get("BANCO", "porta")+"/"+ini.get("BANCO", "nome_banco"));
             bd.setUSER(ini.get("BANCO", "user"));
-            bd.setSENHA(ini.get("BANCO", "senha"));
-            
-            
-
+            bd.setSENHA(tools.decripta(ini.get("BANCO", "senha")));
             UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ControleAutenticacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException | IOException | BadPaddingException | NoSuchPaddingException | IllegalBlockSizeException | InvalidKeyException | NoSuchAlgorithmException | InvalidAlgorithmParameterException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
         if (BD.testaConexao()) {

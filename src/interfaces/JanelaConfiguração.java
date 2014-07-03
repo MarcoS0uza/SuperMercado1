@@ -8,10 +8,15 @@ package interfaces;
 import javax.swing.JOptionPane;
 import persistencia.BD;
 import controle.ControleAutenticacao;
+import controle.Tools;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JFileChooser;
 import org.ini4j.Wini;
 
@@ -23,6 +28,7 @@ public class JanelaConfiguração extends javax.swing.JFrame {
 
     Wini ini;
     JanelaPrincipal jp;
+    Tools tools = new Tools();
 
     /**
      * Creates new form JanelaConfiguração
@@ -44,9 +50,11 @@ public class JanelaConfiguração extends javax.swing.JFrame {
             hostTextField.setText(ini.get("BANCO", "host"));
             portaTextField.setText(ini.get("BANCO", "porta"));
             userTextField.setText(ini.get("BANCO", "user"));
-            senhaPasswordField.setText(ini.get("BANCO", "senha"));
+            senhaPasswordField.setText(tools.decripta(ini.get("BANCO", "senha")));
             caminho_relTextField.setText(ini.get("RELATORIOS", "caminho"));
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } catch (BadPaddingException | NoSuchPaddingException | IllegalBlockSizeException | InvalidKeyException | NoSuchAlgorithmException | InvalidAlgorithmParameterException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
@@ -80,7 +88,7 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurações");
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
+        setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -291,12 +299,14 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         ini.put("BANCO", "host", hostTextField.getText());
         ini.put("BANCO", "porta", portaTextField.getText());
         ini.put("BANCO", "user", userTextField.getText());
-        ini.put("BANCO", "senha", senhaPasswordField.getText().toString());
-        ini.put("RELATORIOS", "caminho",caminho_relTextField.getText());
         try {
+            ini.put("BANCO", "senha", tools.encripta(senhaPasswordField.getText()));
             ini.store();
+
+        } catch (BadPaddingException | NoSuchPaddingException | IllegalBlockSizeException | InvalidKeyException | NoSuchAlgorithmException | InvalidAlgorithmParameterException ex) {
+            JOptionPane.showMessageDialog(null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(JanelaConfiguração.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
         JOptionPane.showMessageDialog(this, "O sistema vai ser reiniciado");
         dispose();
@@ -307,13 +317,10 @@ public class JanelaConfiguração extends javax.swing.JFrame {
         }
         ControleAutenticacao.main();
 
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
 
-    
-        
-    
     private void portaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portaTextFieldActionPerformed
@@ -333,7 +340,7 @@ public class JanelaConfiguração extends javax.swing.JFrame {
             System.exit(1);
             BD.fecharComandoConexão();
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void hostTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hostTextFieldActionPerformed
@@ -345,7 +352,7 @@ public class JanelaConfiguração extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void carregaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carregaButtonActionPerformed
-       JFileChooser chooser;
+        JFileChooser chooser;
         chooser = new JFileChooser();
         String caminho = "";
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -355,8 +362,6 @@ public class JanelaConfiguração extends javax.swing.JFrame {
             caminho_relTextField.setText(caminho);
         }
     }//GEN-LAST:event_carregaButtonActionPerformed
-
-   
 
     /**
      * @param args the command line arguments

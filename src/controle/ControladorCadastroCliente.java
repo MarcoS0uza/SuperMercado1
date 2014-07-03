@@ -13,11 +13,18 @@ public class ControladorCadastroCliente {
 
     public String inserirCliente(Cliente cliente) {
         Cliente cliente1;
+        String result;
         cliente1 = Cliente.buscarCliente(cliente.getCódigo());
         if (cliente1 == null) {
-            return Cliente.inserirCliente(cliente);
+            result = Cliente.verificaDocCadastro(cliente.getN_documento());
+            if(result == null){
+                return Cliente.inserirCliente(cliente);
+            }else{
+                return result;
+            }
+            
         } else {
-            return "Cliente já Cadastrado";
+            return "Código já inserido";
         }
     }
 

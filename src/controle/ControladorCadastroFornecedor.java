@@ -19,11 +19,17 @@ public class ControladorCadastroFornecedor {
 
     public String inserirFornecedor(Fornecedor fornecedor) {
         Fornecedor fornecedor1;
+        String result;
         fornecedor1 = Fornecedor.buscarFornecedor(fornecedor.getCódigo());
         if (fornecedor1 == null) {
-            return Fornecedor.inserirFornecedor(fornecedor);
+            result = Fornecedor.verificaDocCadastro(fornecedor.getN_documento());
+            if(result == null){
+                return Fornecedor.inserirFornecedor(fornecedor);
+            }else{
+                return result;
+            }          
         } else {
-            return "Fornecedor já Cadastrado";
+            return "Código já inserido";
         }
     }
 

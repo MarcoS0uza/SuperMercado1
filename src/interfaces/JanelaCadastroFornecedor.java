@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -28,6 +29,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
     ArrayList<Fornecedor> fornecedores;//armazena fornecedores filtrados
     int cont = 0; // controla a navegação no array de fornecedor
     Tools tools = new Tools();
+
     public JanelaCadastroFornecedor(ControladorCadastroFornecedor controlador) {
         initComponents();
         setLocationRelativeTo(null);
@@ -82,6 +84,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         telefoneFormattedTextField = new javax.swing.JFormattedTextField();
         buscacepjLabel = new javax.swing.JLabel();
         cidadeTextField = new javax.swing.JComboBox();
+        jProgressBar1 = new javax.swing.JProgressBar();
         dataFormattedTextField = new javax.swing.JFormattedTextField();
         dataLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -111,6 +114,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         nome_fornecedorLabel.setText("Nome");
 
         cod_fornecedorTextField.setEditable(false);
+        cod_fornecedorTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cod_fornecedorTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cod_fornecedorTextField.setEnabled(false);
         cod_fornecedorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -119,6 +123,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        nome_fornecedorTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nome_fornecedorTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nome_fornecedorTextField.setEnabled(false);
         nome_fornecedorTextField.setFocusCycleRoot(true);
@@ -127,6 +132,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         email_fornecedorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         email_fornecedorLabel.setText("Email");
 
+        email_fornecedorTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         email_fornecedorTextField.setEnabled(false);
 
         eliminarButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -251,6 +257,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         }
         cnpjFormattedTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cnpjFormattedTextField.setEnabled(false);
+        cnpjFormattedTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cnpjFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cnpjFormattedTextFieldActionPerformed(evt);
@@ -316,6 +323,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         cepFormattedTextField.setEnabled(false);
+        cepFormattedTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         telefoneLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         telefoneLabel.setText("Fone");
@@ -326,6 +334,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         telefoneFormattedTextField.setEnabled(false);
+        telefoneFormattedTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         telefoneFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefoneFormattedTextFieldActionPerformed(evt);
@@ -344,6 +353,9 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        cidadeTextField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cidadeTextField.setEnabled(false);
+
         javax.swing.GroupLayout endereço_fornecedorPanelLayout = new javax.swing.GroupLayout(endereço_fornecedorPanel);
         endereço_fornecedorPanel.setLayout(endereço_fornecedorPanelLayout);
         endereço_fornecedorPanelLayout.setHorizontalGroup(
@@ -359,8 +371,10 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                 .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(endereço_fornecedorPanelLayout.createSequentialGroup()
                         .addComponent(cepFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buscacepjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscacepjLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(endereço_fornecedorPanelLayout.createSequentialGroup()
                         .addComponent(bairroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,10 +398,11 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         endereço_fornecedorPanelLayout.setVerticalGroup(
             endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endereço_fornecedorPanelLayout.createSequentialGroup()
-                .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(buscacepjLabel)
                     .addComponent(cepLabel)
                     .addComponent(cepFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscacepjLabel))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(endereço_fornecedorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ruaLabel)
@@ -489,6 +504,9 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
             dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosPanelLayout.createSequentialGroup()
                 .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(endereço_fornecedorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(dadosPanelLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,10 +530,8 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(email_fornecedorTextField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(dadosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(endereço_fornecedorPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botões_fornecedorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botões_fornecedorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         dadosPanelLayout.setVerticalGroup(
@@ -542,16 +558,16 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                     .addComponent(email_fornecedorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(endereço_fornecedorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(botões_fornecedorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dadosPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(dadosPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -575,6 +591,30 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                 && (fornecedor.getEstado() == null);
     }
 
+    public static String notNull(Fornecedor fornecedor) {
+        String s = null;
+        if (fornecedor.getNome().equals("")) {
+            s += " Nome\n";
+        }
+        if (fornecedor.getN_documento().trim().equals("")) {
+            s += " CNPJ/CPF\n";
+        }
+        if (fornecedor.getCódigo() == -1) {
+            s += " Código\n";
+        }
+        if (fornecedor.getCidade() == null) {
+            s += " Cidade\n";
+        }
+        if (fornecedor.getEstado() == null) {
+            s += " Estado\n";
+        }
+        if (s == null) {
+            return null;
+        } else {
+            return "Campo(s) Obrigatórios:\n" + s.replace("null", "");
+        }
+    }
+
     public static void limpa() {
         dataFormattedTextField.setText("");
         cod_fornecedorTextField.setText("");
@@ -596,8 +636,6 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
     }
 
     public static void setEdição(boolean estado) {
-        cod_fornecedorTextField.setEditable(estado);
-        dataFormattedTextField.setEditable(estado);
         nome_fornecedorTextField.setEditable(estado);
         cnpjFormattedTextField.setEditable(estado);
         email_fornecedorTextField.setEditable(estado);
@@ -678,13 +716,13 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         ArrayList<Visão> cidades = Cliente.getCidades(estadoComboBox.getSelectedItem().toString());
         cidadeTextField.setModel(new DefaultComboBoxModel(cidades.toArray()));
         cidadeTextField.setSelectedItem(fornecedor.getCidade());
-        if (fornecedor.getCidade().contains("-")) {
-            String[] city = fornecedor.getCidade().split("-");//extrai index do nome da cidade
-            int index_cidade = Integer.parseInt(city[0]);//convert o index para inteiro
-            cidadeTextField.setSelectedIndex(index_cidade);
-        } else {
-            cidadeTextField.setSelectedIndex(-1);
-        }
+//        if (fornecedor.getCidade().contains("-")) {
+//            String[] city = fornecedor.getCidade().split("-");//extrai index do nome da cidade
+//            int index_cidade = Integer.parseInt(city[0]);//convert o index para inteiro
+//            cidadeTextField.setSelectedIndex(index_cidade);
+//        } else {
+//            cidadeTextField.setSelectedIndex(-1);
+//        }
         setEdição(false);
         editarSalvar();
         selecionarButton.setVisible(true);
@@ -753,6 +791,9 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
                     mostraDados(fornecedores.get(0));
                     selecionarButton.setVisible(true);
                     buscarButton.setVisible(false);
+                    novoButton.setEnabled(true);
+                    cod_fornecedorTextField.setEditable(false);
+                    gravarButton.setEnabled(false);
 
                 }
             } catch (NumberFormatException ex) {
@@ -763,8 +804,8 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
 
     private void gravarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravarButtonActionPerformed
         selecionarButton.setEnabled(true);
-        cancelaButton.setEnabled(false);
-        String mensagem_erro;
+
+        String mensagem_erro = null;
 
         String cidade, uf;
         int cod, numero;
@@ -794,13 +835,14 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
 
         //cria objeto fornecedor com os dados do jFrame
         Fornecedor fornecedor = new Fornecedor(cod,
-                        numero, nome_fornecedorTextField.getText(), dataFormattedTextField.getText(), tools.retiraMascara(cnpjFormattedTextField.getText()),
-                        ruaTextField.getText(), bairroTextField.getText(), tools.retiraMascara(telefoneFormattedTextField.getText()),
-                        tools.retiraMascara(cepFormattedTextField.getText()), uf,
-                        cidade, email_fornecedorTextField.getText());
+                numero, nome_fornecedorTextField.getText(), dataFormattedTextField.getText(), tools.retiraMascara(cnpjFormattedTextField.getText()),
+                ruaTextField.getText(), bairroTextField.getText(), tools.retiraMascara(telefoneFormattedTextField.getText()),
+                tools.retiraMascara(cepFormattedTextField.getText()), uf,
+                cidade, email_fornecedorTextField.getText());
 
-        if (dadosOK(fornecedor)) {//verificada se tem campos em branco
-            mensagem_erro = "Não pode conter registros em branco";
+        String s = notNull(fornecedor);
+        if (s != null) {//verificada se tem campos em branco
+            JOptionPane.showMessageDialog(this, s, "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
         } else {
             mensagem_erro = controlador.inserirFornecedor(fornecedor);//executa sql
         }
@@ -808,9 +850,12 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         //trata retorno do inserirCliente(fornecedor)
         if (mensagem_erro != null) {
             JOptionPane.showMessageDialog(this, mensagem_erro, "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
-            setAtivo(false);
+        } else if (s == null) {
+            //setAtivo(false);
+            setEdição(false);
             novoButton.setEnabled(true);
+            editar_Button.setEnabled(true);
+            cancelaButton.setEnabled(false);
         }
 
 
@@ -819,6 +864,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
     private void editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_ButtonActionPerformed
         botoesNavegacao(false);
         editar_Button.setVisible(false);
+        gravarButton.setEnabled(false);
         salvarButton.setVisible(true);
         cod_fornecedorTextField.setEditable(false);
         nome_fornecedorTextField.grabFocus();
@@ -853,14 +899,15 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
         }
 
         Fornecedor fornecedor = new Fornecedor(cod,
-                        numero, nome_fornecedorTextField.getText(), dataFormattedTextField.getText(), tools.retiraMascara(cnpjFormattedTextField.getText()),
-                        ruaTextField.getText(), bairroTextField.getText(), tools.retiraMascara(telefoneFormattedTextField.getText()),
-                        tools.retiraMascara(cepFormattedTextField.getText()), uf,
-                        cidade, email_fornecedorTextField.getText());
+                numero, nome_fornecedorTextField.getText(), dataFormattedTextField.getText(), tools.retiraMascara(cnpjFormattedTextField.getText()),
+                ruaTextField.getText(), bairroTextField.getText(), tools.retiraMascara(telefoneFormattedTextField.getText()),
+                tools.retiraMascara(cepFormattedTextField.getText()), uf,
+                cidade, email_fornecedorTextField.getText());
 
-        String mensagem_erro;
-        if (dadosOK(fornecedor)) {
-            mensagem_erro = "Algum campo não foi preenchido";
+        String mensagem_erro = null;
+        String s = notNull(fornecedor);
+        if (s != null) {
+            JOptionPane.showMessageDialog(this, s, "ERRO", JOptionPane.WARNING_MESSAGE);
         } else {
             mensagem_erro = controlador.alterarFornecedor(fornecedor);
             fornecedores.set(cont, fornecedor);
@@ -868,7 +915,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
 
         if (mensagem_erro != null) {
             JOptionPane.showMessageDialog(this, mensagem_erro, "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if (s == null) {
             setEdição(false);
             editarSalvar();
         }
@@ -917,25 +964,41 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void buscacepjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscacepjLabelMouseClicked
-        String cep = cepFormattedTextField.getText().replace(".", "").replace("-", "");
-        if (cep.equals("        ")) {
-            JOptionPane.showMessageDialog(this, "CEP não informado");
-        } else {
-            try {
-                if (buscaCEP.existe(cep)) {
-                    ruaTextField.setText(buscaCEP.getEndereco(cep).replace("Ã£", "ã"));
-                    bairroTextField.setText(buscaCEP.getBairro(cep).replace("Ã£", "ã"));
-                    estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
-                    estadoComboBox.grabFocus();
-                    numeroTextField.grabFocus();
+        if (buscacepjLabel.isEnabled()) {
+            new SwingWorker() {
 
-                } else {
-                    JOptionPane.showMessageDialog(this, "Cep " + cep + " não encontrado ");
+                @Override
+                protected Object doInBackground() throws Exception {
+                    jProgressBar1.setIndeterminate(true);
+                    cidadeTextField.setSelectedIndex(-1);
+                    String cep = cepFormattedTextField.getText().replace(".", "").replace("-", "");
+                    if (cep.equals("        ")) {
+                        JOptionPane.showMessageDialog(null, "CEP não informado");
+                    } else {
+                        try {
+                            if (buscaCEP.existe(cep)) {
+                                ruaTextField.setText(buscaCEP.getEndereco(cep));
+                                bairroTextField.setText(buscaCEP.getBairro(cep));
+                                estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
+                                estadoComboBox.grabFocus();
+                                numeroTextField.grabFocus();
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Cep " + cep + " não encontrado ");
+                            }
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Erro ao buscar endereço: " + ex);
+                        }
+
+                    }
+                    return 0;
                 }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao buscar endereço: " + ex);
-            }
 
+                @Override
+                protected void done() {
+                    jProgressBar1.setIndeterminate(false);
+                }
+            }.execute();
         }
     }//GEN-LAST:event_buscacepjLabelMouseClicked
 
@@ -1045,6 +1108,7 @@ public class JanelaCadastroFornecedor extends javax.swing.JFrame {
     public static javax.swing.JButton gravarButton;
     private javax.swing.JButton imprimirButton;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel nome_fornecedorLabel;
     public static javax.swing.JTextField nome_fornecedorTextField;
     public static javax.swing.JButton novoButton;

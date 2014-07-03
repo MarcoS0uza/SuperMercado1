@@ -15,7 +15,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -86,6 +88,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         telefoneFormattedTextField = new javax.swing.JFormattedTextField();
         buscacepjLabel = new javax.swing.JLabel();
         cidadeTextField = new javax.swing.JComboBox();
+        jProgressBar1 = new javax.swing.JProgressBar();
         dataFormattedTextField = new javax.swing.JFormattedTextField();
         dataLabel = new javax.swing.JLabel();
         sexoComboBox = new javax.swing.JComboBox();
@@ -396,17 +399,18 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                                     .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addComponent(cidadeTextField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(endereço_clientePanelLayout.createSequentialGroup()
-                            .addGroup(endereço_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(endereço_clientePanelLayout.createSequentialGroup()
-                                    .addComponent(cepFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buscacepjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(endereço_clientePanelLayout.createSequentialGroup()
-                                    .addComponent(ruaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(numeroLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ruaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numeroTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
+                            .addComponent(numeroLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(numeroTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                        .addGroup(endereço_clientePanelLayout.createSequentialGroup()
+                            .addComponent(cepFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(19, 19, 19)
+                            .addComponent(buscacepjLabel)
+                            .addGap(18, 18, 18)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE)))
                     .addGroup(endereço_clientePanelLayout.createSequentialGroup()
                         .addComponent(telefoneFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -416,11 +420,12 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         endereço_clientePanelLayout.setVerticalGroup(
             endereço_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endereço_clientePanelLayout.createSequentialGroup()
-                .addGap(0, 9, Short.MAX_VALUE)
-                .addGroup(endereço_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cepLabel)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(endereço_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscacepjLabel)
                     .addComponent(cepFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscacepjLabel))
+                    .addComponent(cepLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(endereço_clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ruaLabel)
@@ -619,7 +624,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(email_clienteLabel))
                     .addComponent(email_clienteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(endereço_clientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botões_clientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -660,8 +665,6 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
 
     //controla se o elemento vai ser editavel ou não
     public static void setEdição(boolean estado) {
-        cod_clienteTextField.setEditable(estado);
-        dataFormattedTextField.setEditable(estado);
         nome_clienteTextField.setEditable(estado);
         cnpjCpfFormattedTextField.setEditable(estado);
         email_clienteTextField.setEditable(estado);
@@ -814,9 +817,10 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                 cepFormattedTextField.getText().replace(".", "").replace("-", "")/*replace() retira mascara*/, uf,
                 cidade, email_clienteTextField.getText());
 
-        String mensagem_erro;
-        if (dadosOK(cliente)) {//verificada se tem campos em branco
-            mensagem_erro = "Algum atributo do cliente não foi preenchido";
+        String mensagem_erro = null;
+        String s = notNull(cliente);
+        if (s != null) {//verificada se tem campos em branco
+            JOptionPane.showMessageDialog(this, s, "ANTEÇÃO", JOptionPane.WARNING_MESSAGE);
         } else {
             mensagem_erro = controlador.alterarCliente(cliente);
             clientes.set(cont, cliente);
@@ -825,7 +829,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         //trata retorno do inserirCliente(cliente)
         if (mensagem_erro != null) {
             JOptionPane.showMessageDialog(this, mensagem_erro, "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if (s == null) {
             setEdição(false);
             editarSalvar();
         }
@@ -835,6 +839,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     //evento editar
     private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
         botoesNavegacao(false);
+        gravar_clienteButton.setEnabled(false);
         editarButton.setVisible(false);
         salvarButton.setVisible(true);
         cod_clienteTextField.setEditable(false);
@@ -845,8 +850,8 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     //evento gravar(Insert)
     private void gravar_clienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravar_clienteButtonActionPerformed
         selecionarButton.setEnabled(true);
-        cancelaButton.setEnabled(false);
-        String mensagem_erro;
+        
+        String mensagem_erro = null;
 
         //captura o tipo do cliente
         if (juridicaRadioButton.isSelected()) {
@@ -904,8 +909,9 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                 cepFormattedTextField.getText().replace(".", "").replace("-", ""), uf,
                 cidade, email_clienteTextField.getText());
 
-        if (dadosOK(cliente)) {//verificada se tem campos em branco
-            mensagem_erro = "Não pode conter registros em branco";
+        String s = notNull(cliente);
+        if (s != null) {//verificada se tem campos em branco
+            JOptionPane.showMessageDialog(this, s, "ERRO", JOptionPane.WARNING_MESSAGE);
         } else {
             mensagem_erro = controlador.inserirCliente(cliente);//executa sql
         }
@@ -913,7 +919,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         //trata retorno do inserirCliente(cliente)
         if (mensagem_erro != null) {
             JOptionPane.showMessageDialog(this, mensagem_erro, "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if (s == null) {
             sexoComboBox.setSelectedIndex(-1);
             cidadeTextField.setSelectedIndex(-1);
             estadoComboBox.setSelectedIndex(-1);
@@ -922,6 +928,10 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
             pessoabuttonGroup.clearSelection();
             estadoComboBox.setSelectedIndex(0);
             sexoComboBox.setSelectedIndex(0);
+            setEdição(false);
+            editarButton.setEnabled(true);
+            cancelaButton.setEnabled(false);
+            
         }
 
 
@@ -1051,28 +1061,72 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
+    public static String notNull(Cliente cliente) {
+        String s = null;
+        if (cliente.getNome().equals("")) {
+            s += " Nome\n";
+        }
+        if (cliente.getN_documento().trim().equals("")) {
+            s += " CNPJ/CPF\n";
+        }
+        if (cliente.getCódigo() == -1) {
+            s += " Código\n";
+        }
+        if (cliente.getCidade() == null) {
+            s += " Cidade\n";
+        }
+        if (cliente.getEstado() == null) {
+            s += " Estado\n";
+        }
+        if (cliente.getTipo_cliente() == null){
+            s += " Tipo\n";
+        }
+        if (cliente.getSexo() == null){
+            s += " Sexo\n";
+        }
+        if (s == null) {
+            return null;
+        } else {
+            return "Campo(s) Obrigatórios:\n" + s.replace("null", "");
+        }
+    }
     //consulta Cep
     private void buscacepjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscacepjLabelMouseClicked
-        cidadeTextField.setSelectedIndex(-1);
-        String cep = cepFormattedTextField.getText().replace(".", "").replace("-", "");
-        if (cep.equals("        ")) {
-            JOptionPane.showMessageDialog(this, "CEP não informado");
-        } else {
-            try {
-                if (buscaCEP.existe(cep)) {
-                    ruaTextField.setText(buscaCEP.getEndereco(cep));
-                    bairroTextField.setText(buscaCEP.getBairro(cep));
-                    estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
-                    estadoComboBox.grabFocus();
-                    numeroTextField.grabFocus();
+        if(buscacepjLabel.isEnabled()){
+        new SwingWorker() {
 
+            @Override
+            protected Object doInBackground() throws Exception {
+                jProgressBar1.setIndeterminate(true);
+                cidadeTextField.setSelectedIndex(-1);
+                String cep = cepFormattedTextField.getText().replace(".", "").replace("-", "");
+                if (cep.equals("        ")) {
+                    JOptionPane.showMessageDialog(null, "CEP não informado");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Cep " + cep + " não encontrado ");
+                    try {
+                        if (buscaCEP.existe(cep)) {
+                            ruaTextField.setText(buscaCEP.getEndereco(cep));
+                            bairroTextField.setText(buscaCEP.getBairro(cep));
+                            estadoComboBox.setSelectedItem(FichaCadastro.UF.valueOf(buscaCEP.getUF(cep)));
+                            estadoComboBox.grabFocus();
+                            numeroTextField.grabFocus();
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cep " + cep + " não encontrado ");
+                        }
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro ao buscar endereço: " + ex);
+                    }
+
                 }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao buscar endereço: " + ex);
+                return 0;
             }
 
+            @Override
+            protected void done() {
+                jProgressBar1.setIndeterminate(false);
+            }
+        }.execute();
         }
 
     }//GEN-LAST:event_buscacepjLabelMouseClicked
@@ -1212,6 +1266,8 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                     mostraDados(clientes.get(0));
                     selecionarButton.setVisible(true);
                     buscarButton.setVisible(false);
+                    novo_clienteButton.setEnabled(true);
+                    cod_clienteTextField.setEditable(false);
 
                 }
             } catch (NumberFormatException ex) {
@@ -1295,6 +1351,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     public static javax.swing.JButton gravar_clienteButton;
     private javax.swing.JButton imprimirButton;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JProgressBar jProgressBar1;
     public static javax.swing.JRadioButton juridicaRadioButton;
     private javax.swing.JLabel nomeLabel;
     public static javax.swing.JTextField nome_clienteTextField;

@@ -37,7 +37,30 @@ public class Cliente extends FichaCadastro {
         }
         return cidades;
     }
-
+    public static String verificaDocCadastro(String nDoc) {
+        String sql = "SELECT cod_cliente,nome_cliente FROM clientes WHERE n_documento_cliente = '" + nDoc + "'";
+        ResultSet lista_resultados;
+        String nome = null;
+        String result = null;
+        int cod = 0;
+        try {
+            lista_resultados = BD.comando.executeQuery(sql);
+            
+            while (lista_resultados.next()) {
+                        cod = lista_resultados.getInt("cod_cliente");
+                        nome = lista_resultados.getString("nome_cliente");
+            }
+            lista_resultados.close();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage());    
+        }
+        if(cod != 0 && nome != null){
+            result = "Documento Nº "+nDoc+" já cadastrado: \n"+cod+" - "+nome;
+        }
+        
+        return  result;
+    }
+    
     //Retorna null se sucesso ou mensagem do SQLException caso caia na excessão
     public static String inserirCliente(Cliente cliente) {
         DateFormat dn = new SimpleDateFormat("yyyy-MM-dd");//Formata data para o formato Mysql

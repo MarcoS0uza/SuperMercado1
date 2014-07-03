@@ -23,7 +23,8 @@ public class Fornecedor extends FichaCadastro {
      */
     //Retorna null se sucesso ou mensagem do SQLException caso caia na excessão
     public static String inserirFornecedor(Fornecedor fornecedor) {
-        DateFormat dc = new SimpleDateFormat("dd/MM/yyyy");//Formata data para o formato Mysql
+        
+        DateFormat dc = new SimpleDateFormat("yyyy-MM-dd");//Formata data para o formato Mysql
         String sql = "INSERT INTO fornecedor(nome_fornecedor,data_cadastro_fornecedor,"
                 + "cnpj_fornecedor,endereco_fornecedor,numero_fornecedor,"
                 + "bairro_fornecedor,cep_fornecedor,telefone_fornecedor,estado_fornecedor,cidade_fornecedor,email_fornecedor)VALUES"
@@ -36,7 +37,7 @@ public class Fornecedor extends FichaCadastro {
             BD.comando.executeUpdate(sql);
             return null;
         } catch (SQLException ex) {
-            return "Erro de inserção no Banco de Dados:  " + ex.getMessage();
+            return "Erro de inserção no Banco de Dados:  " + ex;
         }
     }
 
@@ -121,9 +122,31 @@ public class Fornecedor extends FichaCadastro {
             lista_resultados.close();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, sqle.getMessage());
-            fornecedor = null;
         }
         return fornecedor;
+    }
+    public static String verificaDocCadastro(String cnpj) {
+        String sql = "SELECT cod_fornecedor,cnpj_fornecedor,nome_fornecedor FROM fornecedor WHERE cnpj_fornecedor = '" + cnpj + "'";
+        ResultSet lista_resultados;
+        String nome = null;
+        String result = null;
+        int cod = 0;
+        try {
+            lista_resultados = BD.comando.executeQuery(sql);
+            
+            while (lista_resultados.next()) {
+                        cod = lista_resultados.getInt("cod_fornecedor");
+                        nome = lista_resultados.getString("nome_fornecedor");
+            }
+            lista_resultados.close();
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, sqle.getMessage());    
+        }
+        if(cod != 0 && nome != null){
+            result = "CNPJ "+cnpj+" já cadastrado: \n"+cod+" - "+nome;
+        }
+        
+        return  result;
     }
 
     //retorna novo cod para inserir no BD (o maior codigo do fornecedor + 1), já convertido em String ou mensagem do SQLException caso caia na excessão
@@ -160,6 +183,7 @@ public class Fornecedor extends FichaCadastro {
         }
         return fornecedores;
     }
+    
 
     //altera (Update) dados do fornecedor no BD
     public static String alterarFornecedor(Fornecedor fornecedor) {
